@@ -9,6 +9,13 @@ public class Player
     private String playerColor;
     private ArrayList<Piece> pieces;
 
+    public Player(String name, String playerColor)
+    {
+        this.name = name;
+        this.playerColor = playerColor;
+        this.pieces = null;
+    }
+
     public Player(String name, String playerColor, ArrayList<Piece> pieces)
     {
         this.name = name;

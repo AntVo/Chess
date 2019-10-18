@@ -1,26 +1,20 @@
-import java.util.ArrayList;
+import javax.swing.*;
 
 /**
  * Represents a tile on a chessboard. 
  */
-public class Tile
+public class Tile extends JLabel
 {
     private Piece piece; // Null if empty
     private String tileColor;
 
-    public Tile(tileColor)
+    public Tile(String tileColor)
     {
         this.piece = null;
         this.tileColor = tileColor;
     }
-
-
         
-    public isEmpty(){
+    public boolean isEmpty(){
         return this.piece == null;
     }
-
-    public renderBoard(){
-        // TODO
-    }    
 }
