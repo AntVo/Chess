@@ -13,30 +13,38 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     ChessBoard chessBoard;
 
 
-    // Create LayeredPane on which graphics will be draw.
-    // Add MouseListeners to listen for mouse events 
+    // 
     public void initializeGame(){
         Dimension boardSize = new Dimension(600, 600);
 
-        // Initialize Layered Pane to Draw Board
+        this.graphicsSetup(boardSize);
+
+        // Initialize Chessboard
+        chessBoard = new ChessBoard(boardSize);
+        chessBoard.initializeChessBoard();
+        chessBoard.initializeChessPieces();
+        // Render the chessBoard by adding it to our JFrame
+        layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+    }
+
+    // Perform necessary actions to setup a jframe to render
+    // the game.
+    public void graphicsSetup(Dimension boardSize){
+        // Initialize Layered Pane where everything will be drawn
         layeredPane = new JLayeredPane();
         getContentPane().add(layeredPane);
         layeredPane.setPreferredSize(boardSize);
+
+        // Listen to Mouse actions
         layeredPane.addMouseListener(this);
         layeredPane.addMouseMotionListener(this);
         
+        // More configuration
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.pack();
         this.setResizable(true);
         this.setLocationRelativeTo( null );
         this.setVisible(true);
-
-        // Initiailze Chessboard
-        chessBoard = new ChessBoard(boardSize);
-        chessBoard.initializeChessBoard();
-        chessBoard.initializeChessPieces();
-        // Add the chess board to our jFrame
-        layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
     }
 
     // Given the current state of the Chessboard, Player, and 

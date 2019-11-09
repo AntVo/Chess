@@ -27,12 +27,4 @@ public class Pawn extends JLabel implements Piece
         this.currentTile = currentTile;
         currentTile.add(this);
     }
-
-
-    public void placeholderInterfaceMethod(){
-        // TODO: This is just here as a syntax example for 
-        // when we implement interface methods later
-        return;
-    };
-
 }

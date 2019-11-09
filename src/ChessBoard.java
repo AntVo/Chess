@@ -36,10 +36,12 @@ public class ChessBoard extends JPanel
      */
     public void initializeChessBoard()
     {   
+        // Setup the JFrame that represents the chessboard
         this.setLayout( new GridLayout(8, 8) );
         this.setPreferredSize( this.boardSize );
         this.setBounds(0, 0, this.boardSize.width, this.boardSize.height);
         
+        // Iterate over a matrix and create colored tiles
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
                 Tile tile = new Tile( new BorderLayout() );
@@ -51,20 +53,59 @@ public class ChessBoard extends JPanel
     }
 
     public void initializeChessPieces(){
-        String[] mainChessPieceRow = ["ROOK", "KNIGHT", "BISHOP", "QUEEN", "KING", "BISHOP", "KNIGHT", "ROOK"];
-        // Set the first black row of pieces
+        String[] chessRow = {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK};
+
+        // (1) Set the first black row of pieces
+        int row = 0;
         for (int i = 0; i < 8; i++){
-            // Add pieces to the board
-            // TODO:
-            // Example of adding one piece to board:
-            Tile tileToAddPiece = this.chessBoard[2][2];
-            Pawn whitePawn = this.createPiece(PAWN, WHITE, tileToaddPiece);
+            Tile tileToAddPiece = this.chessBoard[row][i];
+            this.createPiece(chessRow[i], BLACK, tileToAddPiece);
         }
 
+        // (2) Set the row of black pawns
+        row = 1;
+        for (int i = 0; i < 8; i++){
+            Tile tileToAddPiece = this.chessBoard[row][i];
+            this.createPiece(PAWN, BLACK, tileToAddPiece);
+        }
+
+        // (3) Set the row of white pawns
+        row = 6;
+        for (int i = 0; i < 8; i++){
+            Tile tileToAddPiece = this.chessBoard[row][i];
+            this.createPiece(PAWN, WHITE, tileToAddPiece);
+        }        
+
+        // (4) Set the row of white pieces
+        row = 7;
+        for (int i = 0; i < 8; i++){
+            Tile tileToAddPiece = this.chessBoard[row][i];
+            this.createPiece(chessRow[i], WHITE, tileToAddPiece);
+        }        
     }
 
-    public void printBoard(){
-        // TODO
+    public Piece createPiece(String pieceName, String pieceColor, Tile pieceTile){
+        Piece newPiece = null;
+        switch(pieceName){
+            case ROOK:
+                newPiece = new Rook(pieceColor, pieceTile);
+                break;
+            case KNIGHT:
+                newPiece = new Knight(pieceColor, pieceTile);
+                break;
+            case BISHOP:
+                newPiece = new Bishop(pieceColor, pieceTile);
+                break;
+            case QUEEN:
+                newPiece = new Queen(pieceColor, pieceTile);
+                break;
+            case KING:
+                newPiece = new King(pieceColor, pieceTile);
+                break;
+            case PAWN:
+                newPiece = new Pawn(pieceColor, pieceTile);
+        }
+        return newPiece;
     }
 
 
