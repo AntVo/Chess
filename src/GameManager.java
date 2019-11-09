@@ -54,8 +54,33 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     }
 
 
-    public void mousePressed(MouseEvent e){
+
+    /*
+    **  Add the selected chess piece to the dragging layer so it can be moved
+    */
+    public void mousePressed(MouseEvent e)
+    {
+        Component chessPiece =  chessBoard.findComponentAt(e.getX(), e.getY());
+
+        if (!(chessPiece instanceof Piece)) return;
+        System.out.println("Clicked on a chess piece! Inside GameManager.mousePressed()");
+        System.out.println("Piece: ");
+        System.out.println(chessPiece);
+        System.out.println("Piece's Tile: ");
+        System.out.println(chessPiece.currentTile);
+        System.out.println("Now we actually need to implement some functionality");
     }
+
+    /*
+    **  Move the chess piece around
+    */
+    public void mouseDragged(MouseEvent e){}
+
+    /*
+    **  Drop the chess piece back onto the chess board
+    */
+    public void mouseReleased(MouseEvent e){}
+
     public void mouseClicked(MouseEvent e) {
     }
     public void mouseMoved(MouseEvent e) {
@@ -64,11 +89,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     }
     public void mouseExited(MouseEvent e) {
     }
-    public void mouseDragged(MouseEvent me) {
-    }
-    public void mouseReleased(MouseEvent e) {
-    }
-
 
     public static void main(String[] args)
     {
