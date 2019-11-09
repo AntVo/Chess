@@ -7,6 +7,7 @@ import javax.swing.*;
  * Chessboard is represented by a a Matrix of Tile objects.
  * There are two main components of the chessBoard,
  * 1. chessBoard - a Matrix of Tiles that represents the board state.
+ *                 a chessboard contains 64 tiles which themselves can contain pieces.
  * 2. Jpanel - The Chessboard itself extends JPanel and is a GUI element.
  */
 public class ChessBoard extends JPanel
@@ -38,19 +39,20 @@ public class ChessBoard extends JPanel
         this.setLayout( new GridLayout(8, 8) );
         this.setPreferredSize( this.boardSize );
         this.setBounds(0, 0, this.boardSize.width, this.boardSize.height);
-        for (int i = 0; i < 64; i++) {
-            JPanel square = new JPanel( new BorderLayout() );
-            this.add( square );
-            int row = (i / 8) % 2;
-            if (row == 0)
-                square.setBackground( i % 2 == 0 ? Color.black : Color.white );
-            else
-                square.setBackground( i % 2 == 0 ? Color.white : Color.black );
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                Tile tile = new Tile( new BorderLayout() );
+                tile.setBackground( i % 2 == 0 ? Color.black : Color.white );
+                this.chessBoard[i][j] = tile;
+            }
         }
     }
 
     public void initializeChessPieces(){
-
+        System.out.println("Trying to initialize chess pieces");
+        Tile tileToAddPiece = this.chessBoard[2][2];
+        JLabel piece = new JLabel(new ImageIcon("../assets/pieces/test.png") );
+        tileToAddPiece.add(piece);
     }
 
 
