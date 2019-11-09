@@ -63,12 +63,14 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         Component chessPiece =  chessBoard.findComponentAt(e.getX(), e.getY());
 
         if (!(chessPiece instanceof Piece)) return;
+        System.out.println("===============");
         System.out.println("Clicked on a chess piece! Inside GameManager.mousePressed()");
         System.out.println("Piece: ");
         System.out.println(chessPiece);
-        System.out.println("Piece's Tile: ");
-        System.out.println(chessPiece.currentTile);
+        // System.out.println("Piece's Tile: ");
+        // System.out.println(chessPiece.getTile());
         System.out.println("Now we actually need to implement some functionality");
+        System.out.println("===============");
     }
 
     /*
