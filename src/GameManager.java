@@ -24,6 +24,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         layeredPane.setPreferredSize(boardSize);
         layeredPane.addMouseListener(this);
         layeredPane.addMouseMotionListener(this);
+        
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.pack();
         this.setResizable(true);
@@ -68,7 +69,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 
         GameManager gameManager = new GameManager();
         gameManager.initializeGame();
-    
     }
 
 

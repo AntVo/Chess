@@ -1,8 +1,9 @@
 
+
 /**
  * Piece 
  */
-public class Piece
+public interface Piece
 {
-    // TODO
+    public void placeholderInterfaceMethod();
 }

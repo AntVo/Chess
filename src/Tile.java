@@ -12,9 +12,9 @@ public class Tile extends JPanel
 	//Defined variables.
     private Piece piece; // Null if empty
     private String tileColor; 
-    private String notation = "";    
-    private int x;
-    private int y;
+    private String notation = "";
+    public String WHITE = "white";
+    public String BLACK = "black";
     private boolean highlight;
 
     public Tile(BorderLayout borderLayout)
@@ -30,13 +30,10 @@ public class Tile extends JPanel
         this.tileColor = tileColor;
     }
 
-
-    
     //Constructor
     public Tile(boolean color, int x, int y)
     {
-    	this.x = x;
-    	this.y = y;
+
     	this.highlight = false;
         this.piece = null;
         
@@ -48,24 +45,19 @@ public class Tile extends JPanel
         {
         	this.tileColor = BLACK;
         }
-        
+        // TODO: please comment what this does
         this.notation = Character.toString((char)(97+x));
         this.notation += (char)(y+48+1);
-        
     }
-    
-    //Returns x coordinate;
-    public int getX()
-    {
-    	return this.x;
+
+    public int getX(){
+        return this.getLocation().x;
     }
-    
-    //Returns y coordinate.
-    public int getY()
-    {
-    	return this.y;
+
+    public int getY(){
+        return this.getLocation().y;
     }
-    
+
     //Returns color.
     public String getColor()
     {
