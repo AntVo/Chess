@@ -47,14 +47,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         this.setVisible(true);
     }
 
-    // Given the current state of the Chessboard, Player, and 
-    // Pieces, redraw the board.
-    // Render should be called anytime the state of the board
-    public void rerender(){
-    }
-
-
-
     /*
     **  Add the selected chess piece to the dragging layer so it can be moved
     */
