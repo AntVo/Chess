@@ -7,25 +7,11 @@ import javax.swing.*;
 /**
  * Piece 
  */
-public class Queen extends JLabel implements Piece
+public class Queen extends Piece
 {
-    private static String white_icon = "../assets/pieces/white_queen.png";
-    private static String black_icon = "../assets/pieces/black_queen.png";
-    private String color;
-    private Tile currentTile;
 
-    public Queen(String color, Tile currentTile)
+    public Queen(String imageLocation, String color, Tile tile)
     {   
-        super();
-        if (color.toUpperCase() == "WHITE"){
-            this.setIcon(new ImageIcon(white_icon));
-            this.color = "WHITE";
-        }
-        else {
-            this.setIcon(new ImageIcon(black_icon));
-            this.color = "BLACK";
-        }
-        this.currentTile = currentTile;
-        currentTile.add(this);
+        super(imageLocation, color, tile);
     }
 }

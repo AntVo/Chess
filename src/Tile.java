@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Tile extends JPanel
 {
 	//Defined variables.
-    private Piece piece; // Null if empty
+    public Piece piece; // Null if empty
     private String tileColor; 
     private String notation = "";
     public String WHITE = "white";
@@ -75,6 +75,10 @@ public class Tile extends JPanel
     public void setPiece(Piece p)
     {
     	this.piece = p;
+    }
+
+    public Piece getPiece(){
+        return this.piece;
     }
     
     //Checks if there is a piece present.
