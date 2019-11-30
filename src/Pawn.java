@@ -26,10 +26,11 @@ public class Pawn extends Piece
     	return null;
     	
     }
+    
     @Override
-    public boolean validSpot(ChessBoard board, int xStart, int yStart, int xEnd, int yEnd)
+    public boolean validSpot(ChessBoard board, int colStart, int rowStart, int rowEnd, int colEnd)
     {
-    	if(super.validSpot(board, xStart, yStart, xEnd, yEnd) == false)
+    	if(super.validSpot(board, colStart, rowStart, rowEnd, colEnd) == false)
     		return false;
     	
     	if(xStart - xEnd == 0)

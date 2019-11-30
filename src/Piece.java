@@ -20,14 +20,25 @@ public abstract class Piece extends JLabel
         this.currentTile.add(this);
     }
     
-    public boolean validSpot(ChessBoard board, int xStart, int yStart, int xEnd, int yEnd)
-    {
-    	if(xStart == xEnd && yStart == yEnd)
+    /**
+     * Validate a move    
+     * @param  board  Chessboard object holding state of the chessboard
+     * @param  rowStart piece's initial chess row
+     * @param  colStart piece's initial chess column
+     * @param  rowEnd   row to move the chess piece to
+     * @param  colEnd   column to move the chess piece to
+     * @return true if valid, else false
+     */
+    public boolean validSpot(ChessBoard board, int colStart, int rowStart, int rowEnd, int colEnd)
+    {   
+    	if(colStart == colEnd && rowStart == rowEnd)
     	{
+            // Did not change location
     		return false;
     	}
-    	if(xEnd > 7 || xEnd < 0 || yEnd > 7 || yEnd < 0)
+    	if(colEnd > 7 || colEnd < 0 || rowEnd > 7 || rowEnd < 0)
     	{
+            // Outside boundaries of Chessboard
     		return false;
     	}
     	return true;
