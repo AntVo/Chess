@@ -96,6 +96,8 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 
     	if(clickedTile.isEmpty())
     	{
+    		if(selectedPiece != null)
+    		{
     			selectedPiece.move(clickedTile);
     			chessBoard.repaint();
     			if(currentPlayer.getPlayerColor() == WHITE)
@@ -106,7 +108,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     			{
     				currentPlayer = playerOne;
     			}
-    		
+    		}
     		selectedPiece = null;
     		if(selectedTile != null)
     			selectedTile.highlight = false;
