@@ -67,17 +67,16 @@ public class Tile extends JPanel
     public void paintComponent(Graphics g)
     {
     	super.paintComponent(g);
-    	this.repaint();
-    	if(!highlight)
+    	
+    	if(highlight)
     	{
     		int thickness = 5;
-    		g.fillRect(this.getX(), this.getY(), this.getWidth(), thickness);
-    		g.fillRect(this.getX(), this.getY(), thickness, this.getHeight());
+    		g.fillRect(0, 0, this.getWidth(), thickness);
+    		g.fillRect(0, 0, thickness, this.getHeight());
     		
-    		g.fillRect(this.getX(), this.getY() + this.getHeight() - thickness, this.getWidth(), thickness);
-    		g.fillRect(this.getX() + this.getWidth() - thickness, this.getY(), thickness, this.getHeight());
+    		g.fillRect(0, this.getHeight() - thickness, this.getWidth(), thickness);
+    		g.fillRect(this.getWidth() - thickness, 0, thickness, this.getHeight());
     	}
-    	//this.repaint();
     }
 
     public int getX(){

@@ -144,7 +144,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 	    			selectedPiece = clickedTile.getPiece();
 	    			selectedTile = clickedTile;
 	    			selectedTile.highlight = true;
-	    			chessBoard.repaint();
+	    			selectedTile.repaint();
 	    		}
     		}
     	}
