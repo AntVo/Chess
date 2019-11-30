@@ -13,14 +13,25 @@ public class Tile extends JPanel
     public Piece piece; // Null if empty
     private String tileColor; 
     private String notation = "";
-    public String WHITE = "white";
-    public String BLACK = "black";
-    private boolean highlight;
+    public String WHITE = "WHITE";
+    public String BLACK = "BLACK";
+    public boolean highlight;
+    
+    int x, y;
 
     public Tile(BorderLayout borderLayout)
     {
         super(borderLayout);
         this.piece = null;
+    }
+    
+    public Tile(BorderLayout borderLayout, int x, int y)
+    {
+        super(borderLayout);
+        this.piece = null;
+        
+        this.x = x;
+        this.y = y;
     }
         
     public Tile(BorderLayout borderLayout, String tileColor)
@@ -45,9 +56,28 @@ public class Tile extends JPanel
         {
         	this.tileColor = BLACK;
         }
-        // TODO: please comment what this does
-        this.notation = Character.toString((char)(97+x));
-        this.notation += (char)(y+48+1);
+        this.x = x;
+        this.y = y;
+//        // TODO: please comment what this does
+//        this.notation = Character.toString((char)(97+x));
+//        this.notation += (char)(y+48+1);
+    }
+    
+    @Override
+    public void paintComponent(Graphics g)
+    {
+    	super.paintComponent(g);
+    	this.repaint();
+    	if(!highlight)
+    	{
+    		int thickness = 5;
+    		g.fillRect(this.getX(), this.getY(), this.getWidth(), thickness);
+    		g.fillRect(this.getX(), this.getY(), thickness, this.getHeight());
+    		
+    		g.fillRect(this.getX(), this.getY() + this.getHeight() - thickness, this.getWidth(), thickness);
+    		g.fillRect(this.getX() + this.getWidth() - thickness, this.getY(), thickness, this.getHeight());
+    	}
+    	//this.repaint();
     }
 
     public int getX(){
@@ -62,14 +92,17 @@ public class Tile extends JPanel
     public String getColor()
     {
     	return this.tileColor;
-    }
+    }	
     
     //Returns a removed piece.
     public Piece removePiece()
     {
     	Piece p = this.piece;
+    	this.remove(this.piece);
+    	piece = null;
     	return p;
     }
+    
     
     //Sets a piece.
     public void setPiece(Piece p)
@@ -82,7 +115,8 @@ public class Tile extends JPanel
     }
     
     //Checks if there is a piece present.
-    public boolean isEmpty(){
+    public boolean isEmpty()
+   {
         return this.piece == null;
     }
 }

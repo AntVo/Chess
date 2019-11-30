@@ -8,10 +8,15 @@ Class to manage and handle game logic for a Chess game
 */
 public class GameManager extends JFrame implements MouseListener, MouseMotionListener
 {   
-    // The entire game is drawed on top of this layeredPane
+    // The entire game is drawn on top of this layeredPanel
+	Player currentPlayer = null;
     JLayeredPane layeredPane;
     ChessBoard chessBoard;
-
+    Piece selectedPiece = null;
+    Tile selectedTile = null;
+    
+    Player playerOne = new Player("Player One", WHITE );
+    Player playerTwo = new Player("Player Two", BLACK );
 
     // 
     public void initializeGame(){
@@ -23,6 +28,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         chessBoard = new ChessBoard(boardSize);
         chessBoard.initializeChessBoard();
         chessBoard.initializeChessPieces();
+        currentPlayer = playerOne;
         // Render the chessBoard by adding it to our JFrame
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
     }
@@ -57,10 +63,12 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         System.out.println("Clicked on a chess tile! Inside GameManager.mousePressed()");
         System.out.println("Piece: ");
         System.out.println(piece);
-
-
+        System.out.println(piece);
+        // System.out.println("Piece's Tile: ");
+        // System.out.println(chessPiece.getTile());
         System.out.println("Now we actually need to implement some functionality");
         System.out.println("===============");
+        System.out.println("\nThe current Player is: " + currentPlayer.getPlayerColor());
     }
 
     /*
@@ -70,10 +78,75 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 
     /*
     **  Drop the chess piece back onto the chess board
+    * 	Arman - Do we even need this? cant we just click, and click again?
+    *  	i.e.	We could probably just use mouseClicked
+    *  maybe we can implement both later, if we have time
     */
     public void mouseReleased(MouseEvent e){}
 
+    /*
+     *  if tile is clicked, check piece color, check turn,
+     *   get options for movement
+     *  if tile was clicked with no piece on it, check if a piece was
+     *  	clicked before and move it if valid
+     *  if tile is empty, do nothing
+     */
     public void mouseClicked(MouseEvent e) {
+    	Tile clickedTile = chessBoard.getTileAt(e.getX(), e.getY());
+
+    	if(clickedTile.isEmpty())
+    	{
+    			selectedPiece.move(clickedTile);
+    			chessBoard.repaint();
+    			if(currentPlayer.getPlayerColor() == WHITE)
+    			{
+    				currentPlayer = playerTwo;
+    			}
+    			else
+    			{
+    				currentPlayer = playerOne;
+    			}
+    		
+    		selectedPiece = null;
+    		if(selectedTile != null)
+    			selectedTile.highlight = false;
+    		selectedTile = null;
+    	}
+    	else	
+    	{
+    		if(selectedPiece != null)
+    		{
+    			if(clickedTile.getPiece().color != currentPlayer.getPlayerColor())
+    			{
+    				clickedTile.removePiece();
+    				selectedPiece.move(clickedTile);
+        			chessBoard.repaint();
+        			if(currentPlayer.getPlayerColor() == WHITE)
+        			{
+        				currentPlayer = playerTwo;
+        			}
+        			else
+        			{
+        				currentPlayer = playerOne;
+        			}
+        			selectedPiece = null;
+            		if(selectedTile != null)
+            			selectedTile.highlight = false;
+            		selectedTile = null;
+    			}
+    		}
+    		else
+    		{
+	    		if(clickedTile.getPiece().color == currentPlayer.getPlayerColor())
+	    		{
+	    			selectedPiece = clickedTile.getPiece();
+	    			selectedTile = clickedTile;
+	    			selectedTile.highlight = true;
+	    			chessBoard.repaint();
+	    		}
+    		}
+    	}
+    	
     }
     public void mouseMoved(MouseEvent e) {
     }
@@ -84,8 +157,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 
     public static void main(String[] args)
     {
-        Player playerOne = new Player("Player One", WHITE );
-        Player playerTwo = new Player("Player Two", BLACK );
+        
 
         GameManager gameManager = new GameManager();
         gameManager.initializeGame();

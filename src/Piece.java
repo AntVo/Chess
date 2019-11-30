@@ -43,5 +43,15 @@ public abstract class Piece extends JLabel
     	}
     	return true;
     }
+    
+    public void move(Tile selectedTile)
+    {
+    	System.out.println("moving piece");
+    	//this.currentTile.remove(this);
+    	this.currentTile.removePiece();
+    	selectedTile.add(this);
+    	selectedTile.setPiece(this);
+    	this.currentTile = selectedTile;
+    }
 }
 
