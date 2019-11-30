@@ -11,7 +11,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     // The entire game is drawed on top of this layeredPane
     JLayeredPane layeredPane;
     ChessBoard chessBoard;
-
+    Piece currentlySelectedPiece;
 
     // 
     public void initializeGame(){
@@ -51,16 +51,37 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     **  Add the selected chess piece to the dragging layer so it can be moved
     */
     public void mousePressed(MouseEvent e)
-    {
-        Component piece =  chessBoard.findComponentAt(e.getX(), e.getY());
-        System.out.println("===============");
-        System.out.println("Clicked on a chess tile! Inside GameManager.mousePressed()");
-        System.out.println("Piece: ");
-        System.out.println(piece);
+    {   
+        Component clickedElement = chessBoard.findComponentAt(e.getX(), e.getY());
+            
+        // Handle user clicking on a piece
+        if (clickedElement instanceof Piece){
+            Piece piece =  (Piece)clickedElement;
+            this.currentlySelectedPiece = piece;
 
+            System.out.println("===============");
+            System.out.println("Clicked on a chess tile! Inside GameManager.mousePressed()");
+            System.out.println("Piece: ");
+            System.out.println(piece);
+            chessBoard.highlightAvailableMoves(piece);
 
-        System.out.println("Now we actually need to implement some functionality");
-        System.out.println("===============");
+            System.out.println("Now we actually need to implement some functionality");
+            System.out.println("===============");
+            return;
+        }
+
+        // Handle user clicked on an empty tile
+        if (clickedElement instanceof Tile){
+            chessBoard.removeAllHighlights();
+            if (currentlySelectedPiece != null){
+                System.out.println("Moving piece");
+                // Selected a piece and clicked on empty tile -> Move piece to that tile
+                Tile clickedTile = (Tile)clickedElement;
+                this.currentlySelectedPiece.movePiece(clickedTile);  
+                this.currentlySelectedPiece = null;
+            }
+        }
+
     }
 
     /*
@@ -74,6 +95,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent e){}
 
     public void mouseClicked(MouseEvent e) {
+
     }
     public void mouseMoved(MouseEvent e) {
     }

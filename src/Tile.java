@@ -15,7 +15,8 @@ public class Tile extends JPanel
     private String notation = "";
     public String WHITE = "white";
     public String BLACK = "black";
-    private boolean highlight;
+    private int row;
+    private int col;
 
     public Tile(BorderLayout borderLayout)
     {
@@ -31,39 +32,37 @@ public class Tile extends JPanel
     }
 
     //Constructor
-    public Tile(boolean color, int x, int y)
+    public Tile(BorderLayout borderLayout, int row, int col)
     {
 
-    	this.highlight = false;
         this.piece = null;
-        
-        if(color == true)
-        {
-        	this.tileColor = WHITE;
-        }
-        else
-        {
-        	this.tileColor = BLACK;
-        }
+        this.row = row;
+        this.col = col;
+
         // TODO: please comment what this does
-        this.notation = Character.toString((char)(97+x));
-        this.notation += (char)(y+48+1);
+        this.notation = Character.toString((char)(97+row));
+        this.notation += (char)(col+48+1);
     }
 
-    public int getX(){
-        return this.getLocation().x;
+    public int getRow(){
+        return this.row;
     }
 
-    public int getY(){
-        return this.getLocation().y;
+    public int getCol(){
+        return this.col;
     }
 
-    //Returns color.
+    // Returns color.
     public String getColor()
     {
     	return this.tileColor;
     }
     
+    public void setColor(Color color)
+    {
+       this.setBackground(color);
+    }
+
     //Returns a removed piece.
     public Piece removePiece()
     {
