@@ -58,12 +58,10 @@ public class Bishop extends Piece
         }
 
         // Add all valid southwest moves to array of valid moves
-        System.out.println("getting SW moves");
         currRow = row + 1;
         currCol = col - 1;
         while (validSpot(board, row, col, currRow, currCol)){
             Tile currTile = board.getTileAtLocation(currRow, currCol);
-            System.out.println("adding a tile");
             validMoves.add(currTile);
 
             // If we run into enemy piece, we added it as a valid move, but
@@ -75,7 +73,6 @@ public class Bishop extends Piece
             currRow++;
             currCol--;
         }
-        System.out.println("done getting sw moves");
 
         // Add all valid southeast moves to array of valid moves
         currRow = row + 1;

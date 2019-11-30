@@ -92,7 +92,6 @@ public abstract class Piece extends JLabel
         // Validate not outside of chessboard
     	if(colEnd > 7 || colEnd < 0 || rowEnd > 7 || rowEnd < 0)
     	{
-            System.out.println("outside chessboard?");
     		return false;
     	}
 
@@ -101,16 +100,23 @@ public abstract class Piece extends JLabel
         Piece destinationPiece = board.getPieceAtLocation(rowEnd, colEnd);
         if (destinationPiece != null){
             if (destinationPiece.getColor() == this.getColor()){
-                System.out.println("ran into same color piece");
                 return false;
             }
             if (destinationPiece instanceof King){
-                System.out.println("found king!");
                 return false;
             }
         }
 
     	return true;
+    }
+    
+    public void move(Tile selectedTile)
+    {
+    	//this.currentTile.remove(this);
+    	this.currentTile.removePiece();
+    	selectedTile.add(this);
+    	selectedTile.setPiece(this);
+    	this.currentTile = selectedTile;
     }
 }
 

@@ -4,7 +4,7 @@ import java.util.*;
 import javax.swing.*;
 
 /**
- * Chessboard is represented by a a Matrix of Tile objects.
+ * Chessboard is represented by a Matrix of Tile objects.
  * There are two main components of the chessBoard,
  * 1. chessBoard - a Matrix of Tiles that represents the board state.
  *                 a chessboard contains 64 tiles which themselves can contain pieces.
@@ -45,6 +45,7 @@ public class ChessBoard extends JPanel
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
                 Tile tile = new Tile( new BorderLayout(), i, j);
+
                 tile.setBackground( i % 2 == j % 2 ? DARK_BROWN : LIGHT_BROWN);
                 this.chessBoard[i][j] = tile;
                 this.add(tile);
@@ -113,6 +114,14 @@ public class ChessBoard extends JPanel
                 newPiece = new Pawn(imgLocation, pieceColor, pieceTile);
         }
         return newPiece;
+    }
+    
+    public Tile getTileAt(int x, int y)
+    {
+    	int chessX = y / (boardSize.width / 8);
+    	int chessY = x / (boardSize.height / 8);
+    	System.out.println("[" + chessX + ", " + chessY + "]");
+    	return chessBoard[chessX][chessY]; 
     }
 
     public Tile getTileAtLocation(int row, int col){
