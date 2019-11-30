@@ -109,14 +109,5 @@ public abstract class Piece extends JLabel
 
     	return true;
     }
-    
-    public void move(Tile selectedTile)
-    {
-    	//this.currentTile.remove(this);
-    	this.currentTile.removePiece();
-    	selectedTile.add(this);
-    	selectedTile.setPiece(this);
-    	this.currentTile = selectedTile;
-    }
 }
 
