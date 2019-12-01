@@ -64,14 +64,14 @@ public abstract class Piece extends JLabel
     
 
     /**
-     * Validate a move. 
+     * Validate a single move
      * By default, all pieces cannot make a move if
      *  - Destination is same as current location
      *  - Destination is a King
      *  - Destination holds a same color piece
      *  - Destination is outside the board
      *  
-     * Specific  piece validation should be done by overriding this method.
+     * Additional spot validation needs to be done on a piece-by-piece basis.
      * 
      * @param  board  Chessboard object holding state of the chessboard
      * @param  rowStart piece's initial chess row
@@ -86,7 +86,6 @@ public abstract class Piece extends JLabel
         // Validate destination is different than current location
     	if(colStart == colEnd && rowStart == rowEnd)
     	{
-            System.out.println("different location?");
     		return false;
     	}
 
@@ -121,71 +120,71 @@ public abstract class Piece extends JLabel
 
 
         // Add all valid northwest moves to array of valid moves
-        int currRow = row - 1;
-        int currCol = col - 1;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        int destRow = row - 1;
+        int destCol = col - 1;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
 
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currRow--;
-            currCol--;
+            destRow--;
+            destCol--;
         }
 
         // Add all valid northeast moves to array of valid moves
-        currRow = row - 1;
-        currCol = col + 1;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        destRow = row - 1;
+        destCol = col + 1;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
 
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currRow--;
-            currCol++;
+            destRow--;
+            destCol++;
         }
 
         // Add all valid southwest moves to array of valid moves
-        currRow = row + 1;
-        currCol = col - 1;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        destRow = row + 1;
+        destCol = col - 1;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
 
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currRow++;
-            currCol--;
+            destRow++;
+            destCol--;
         }
 
         // Add all valid southeast moves to array of valid moves
-        currRow = row + 1;
-        currCol = col + 1;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        destRow = row + 1;
+        destCol = col + 1;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
 
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currRow++;
-            currCol++;
+            destRow++;
+            destCol++;
         }
         return validMoves;
     }    
@@ -198,63 +197,63 @@ public abstract class Piece extends JLabel
 
 
         // Add all valid left moves to array of valid moves
-        int currRow = row;
-        int currCol = col - 1;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        int destRow = row;
+        int destCol = col - 1;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currCol--;
+            destCol--;
         }
 
         // Add all valid right moves to array of valid moves
-        currRow = row;
-        currCol = col + 1;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        destRow = row;
+        destCol = col + 1;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currCol++;
+            destCol++;
         }
 
         // Add all valid upwards moves to valid moves
-        currRow = row - 1;
-        currCol = col;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        destRow = row - 1;
+        destCol = col;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currRow--;
+            destRow--;
         }
 
         // Add all valid down moves to valid moves
-        currRow = row + 1;
-        currCol = col;
-        while (validSpot(board, row, col, currRow, currCol)){
-            Tile currTile = board.getTileAtLocation(currRow, currCol);
+        destRow = row + 1;
+        destCol = col;
+        while (validSpot(board, row, col, destRow, destCol)){
+            Tile currTile = board.getTileAtLocation(destRow, destCol);
             validMoves.add(currTile);
             // If we run into enemy piece, we added it as a valid move, but
             // dont allow further movement in direction
-            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            Piece currPiece = board.getPieceAtLocation(destRow, destCol);
             if (currPiece != null && currPiece.getColor() != this.getColor()){
                 break;
             }
-            currRow++;
+            destRow++;
         }
         return validMoves;
     }    
