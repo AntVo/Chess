@@ -151,6 +151,7 @@ public class ChessBoard extends JPanel
     final Color DARK_BROWN = new Color(102, 51, 0);
     final Color LIGHT_GREEN = new Color(50, 150, 50);
 
+
     private static final String ROOK = "ROOK";
     private static final String KNIGHT = "KNIGHT";
     private static final String BISHOP = "BISHOP";
@@ -159,17 +160,17 @@ public class ChessBoard extends JPanel
     private static final String PAWN = "PAWN";
     private static final String WHITE = "WHITE";
     private static final String BLACK = "BLACK";
-    private static final String WHITE_BISHOP_PNG = "../assets/pieces/white_bishop.png";
-    private static final String BLACK_BISHOP_PNG = "../assets/pieces/black_bishop.png";
-    private static final String WHITE_KNIGHT_PNG = "../assets/pieces/white_knight.png";
-    private static final String BLACK_KNIGHT_PNG ="../assets/pieces/black_knight.png";
-    private static final String WHITE_ROOK_PNG = "../assets/pieces/white_rook.png";
-    private static final String BLACK_ROOK_PNG = "../assets/pieces/black_rook.png";
-    private static final String WHITE_KING_PNG = "../assets/pieces/white_king.png";
-    private static final String BLACK_KING_PNG = "../assets/pieces/black_king.png";
-    private static final String BLACK_QUEEN_PNG = "../assets/pieces/black_queen.png";
-    private static final String WHITE_QUEEN_PNG = "../assets/pieces/white_queen.png";
-    private static final String WHITE_PAWN_PNG = "../assets/pieces/white_pawn.png";
-    private static final String BLACK_PAWN_PNG = "../assets/pieces/black_pawn.png";
+    private static final String WHITE_BISHOP_PNG = "assets/pieces/white_bishop.png";
+    private static final String BLACK_BISHOP_PNG = "assets/pieces/black_bishop.png";
+    private static final String WHITE_KNIGHT_PNG = "assets/pieces/white_knight.png";
+    private static final String BLACK_KNIGHT_PNG ="assets/pieces/black_knight.png";
+    private static final String WHITE_ROOK_PNG = "assets/pieces/white_rook.png";
+    private static final String BLACK_ROOK_PNG = "assets/pieces/black_rook.png";
+    private static final String WHITE_KING_PNG = "assets/pieces/white_king.png";
+    private static final String BLACK_KING_PNG = "assets/pieces/black_king.png";
+    private static final String BLACK_QUEEN_PNG = "assets/pieces/black_queen.png";
+    private static final String WHITE_QUEEN_PNG = "assets/pieces/white_queen.png";
+    private static final String WHITE_PAWN_PNG = "assets/pieces/white_pawn.png";
+    private static final String BLACK_PAWN_PNG = "assets/pieces/black_pawn.png";
 
 }
