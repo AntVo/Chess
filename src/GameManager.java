@@ -86,11 +86,11 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                 }
             }
 
-
             // TODO: Handle when user has not yet selected a piece and clicks on a piece
             if (clickedPiece.color == currentPlayer.getPlayerColor()){
                 this.selectedPiece = clickedPiece;
                 chessBoard.highlightAvailableMoves(clickedPiece);
+                selectedPiece.getTile().highlightSelf();
             }
             return;
         }
@@ -98,13 +98,13 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         // Handle user clicked on an empty tile
         if (clickedElement instanceof Tile){
             chessBoard.removeAllHighlights();
+            selectedTile = (Tile)clickedElement;
 
             // Handle moving a piece:
             if (this.selectedPiece != null){
                 if (this.selectedPiece.getColor() == currentPlayer.getPlayerColor()){
                     System.out.println("Moving piece");
                     // Selected a piece and clicked on empty tile -> Move piece to that tile
-                    selectedTile = (Tile)clickedElement;
                     this.selectedTile = selectedTile;
                     this.selectedPiece.movePiece(selectedTile);  
                     this.selectedPiece = null;

@@ -52,7 +52,7 @@ public class Tile extends JPanel
         return this.col;
     }
 
-    // Returns color.
+    // Returns color
     public String getColor()
     {
     	return this.tileColor;
@@ -81,7 +81,11 @@ public class Tile extends JPanel
     public Piece getPiece(){
         return this.piece;
     }
-    
+
+    public void highlightSelf(){
+        this.setBackground(new Color(80, 80, 200));
+    }
+
     //Checks if there is a piece present.
     public boolean isEmpty(){
         return this.piece == null;
