@@ -35,7 +35,7 @@ public abstract class Piece extends JLabel
     }
 
     public Tile getTile(){
-        return currentTile;
+        return this.currentTile;
     }
 
     // Move piece to a tile

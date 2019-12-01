@@ -66,8 +66,10 @@ public class Tile extends JPanel
     //Returns a removed piece.
     public Piece removePiece()
     {
-    	Piece p = this.piece;
-    	return p;
+        Piece p = this.piece;
+        this.remove(this.piece);
+        this.piece = null;
+        return p;
     }
     
     //Sets a piece.
