@@ -26,7 +26,7 @@ public class Help extends JPanel {
 		setBounds(new Rectangle(0, 0, 600, 600));
 		
 		JLabel MainMenuBackground = new JLabel("");
-		MainMenuBackground.setIcon(new ImageIcon("assets/main/MainMenuBackground.png"));
+		MainMenuBackground.setIcon(new ImageIcon("assets/main/HelpBackground.png"));
 		MainMenuBackground.setBounds(0, 0, 600, 600);
 		add(MainMenuBackground);
 		
