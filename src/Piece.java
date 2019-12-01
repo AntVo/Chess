@@ -109,6 +109,7 @@ public abstract class Piece extends JLabel
 
     	return true;
     }
+    
 
     // Given a Board, return an ArrayList of all Tiles diagonal from the
     // current piece.

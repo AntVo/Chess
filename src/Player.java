@@ -8,6 +8,7 @@ public class Player
     private String name;
     private String playerColor;
     private ArrayList<Piece> pieces;
+    private Piece myKing;
 
     public Player(String name, String playerColor)
     {
@@ -33,9 +34,16 @@ public class Player
 
     public void addPiece(Piece piece){
         this.pieces.add(piece);
+        if (piece instanceof King){
+            this.myKing = piece;
+        }
     }
 
     public ArrayList<Piece> getPieces(){
         return this.pieces;
+    }
+
+    public Piece getKing(){
+        return this.myKing;
     }
 }

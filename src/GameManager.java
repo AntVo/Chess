@@ -120,6 +120,14 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             }
         }
 
+
+        // Look for Check/Checkmates in boardstate after every action
+        System.out.println("CHECK AND CHECKMATES:");
+        System.out.println(chessBoard.isChecked(playerOne));
+        System.out.println(chessBoard.isCheckmated(playerOne));        
+        System.out.println(chessBoard.isChecked(playerTwo));
+        System.out.println(chessBoard.isCheckmated(playerTwo));   
+
         // Player clicking did not do anything. Reset state
         selectedPiece = null;
         selectedTile = null;
@@ -127,6 +135,8 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         System.out.println("Current Player: ");
         System.out.println(currentPlayer.getPlayerColor());
     }
+
+
 
     /*
     **  Move the chess piece around. Bonus if we have time. 

@@ -155,10 +155,30 @@ public class ChessBoard extends JPanel
         }
     }
 
+    public boolean isChecked(Player player){
+        Player opponent = player == playerOne ? playerTwo : playerOne;
+        Piece playersKing = player.getKing();
+        Tile kingsTile = playersKing.getTile();
+        
+        if (kingsTile.isUnderAttack(this, opponent)){
+            kingsTile.setColor(LIGHT_RED);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isCheckmated(Player player){
+        Piece playersKing = player.getKing();
+        if (playersKing.getValidMoves(this).isEmpty() && isChecked(player)){
+            return true;
+        }
+        return false;
+    }
+
     final Color LIGHT_BROWN = new Color(153, 102, 0);
     final Color DARK_BROWN = new Color(102, 51, 0);
     final Color LIGHT_GREEN = new Color(50, 150, 50);
-
+    final Color LIGHT_RED = new Color(180, 40, 40);
 
 
     private static final String ROOK = "ROOK";
