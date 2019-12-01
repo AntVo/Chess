@@ -15,9 +15,8 @@ public class Knight extends Piece
     }
 
     // Return ArrayList of Tiles piece can move to
-    public ArrayList<Tile> getValidMoves(ChessBoard board, int row, int col)
+    public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
-
         ArrayList<Tile> validMoves = new ArrayList<Tile>();
         return validMoves;
     }

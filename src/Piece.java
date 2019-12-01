@@ -12,6 +12,7 @@ public abstract class Piece extends JLabel
     String color;
     Tile currentTile;
     String imageLocation;
+    
     public Piece(String imageLocation, String color, Tile tile) {
     	super();
         this.setIcon(new ImageIcon(imageLocation));
@@ -109,5 +110,153 @@ public abstract class Piece extends JLabel
 
     	return true;
     }
+
+    // Given a Board, return an ArrayList of all Tiles diagonal from the
+    // current piece.
+    public ArrayList<Tile> getValidDiagonalMoves(ChessBoard board)
+    {       
+        int row = this.getRow();
+        int col = this.getCol();
+        ArrayList<Tile> validMoves = new ArrayList<Tile>();
+
+
+        // Add all valid northwest moves to array of valid moves
+        int currRow = row - 1;
+        int currCol = col - 1;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currRow--;
+            currCol--;
+        }
+
+        // Add all valid northeast moves to array of valid moves
+        currRow = row - 1;
+        currCol = col + 1;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currRow--;
+            currCol++;
+        }
+
+        // Add all valid southwest moves to array of valid moves
+        currRow = row + 1;
+        currCol = col - 1;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currRow++;
+            currCol--;
+        }
+
+        // Add all valid southeast moves to array of valid moves
+        currRow = row + 1;
+        currCol = col + 1;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currRow++;
+            currCol++;
+        }
+        return validMoves;
+    }    
+
+    public ArrayList<Tile> getValidHorizontalAndVerticalMoves(ChessBoard board)
+    {       
+        int row = this.getRow();
+        int col = this.getCol();
+        ArrayList<Tile> validMoves = new ArrayList<Tile>();
+
+
+        // Add all valid left moves to array of valid moves
+        int currRow = row;
+        int currCol = col - 1;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currCol--;
+        }
+
+        // Add all valid right moves to array of valid moves
+        currRow = row;
+        currCol = col + 1;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currCol++;
+        }
+
+        // Add all valid upwards moves to valid moves
+        currRow = row - 1;
+        currCol = col;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currRow--;
+        }
+
+        // Add all valid down moves to valid moves
+        currRow = row + 1;
+        currCol = col;
+        while (validSpot(board, row, col, currRow, currCol)){
+            Tile currTile = board.getTileAtLocation(currRow, currCol);
+            validMoves.add(currTile);
+            // If we run into enemy piece, we added it as a valid move, but
+            // dont allow further movement in direction
+            Piece currPiece = board.getPieceAtLocation(currRow, currCol);
+            if (currPiece != null && currPiece.getColor() != this.getColor()){
+                break;
+            }
+            currRow++;
+        }
+        return validMoves;
+    }    
 }
 
