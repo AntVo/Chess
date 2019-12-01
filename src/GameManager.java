@@ -107,15 +107,21 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             // ex: if (Tile is in Piece.getValidMoves())
             if (this.selectedPiece != null){
                 if (this.selectedPiece.getColor() == currentPlayer.getPlayerColor()){
-                    System.out.println("Moving piece");
-                    // Selected a piece and clicked on empty tile -> Move piece to that tile
-                    this.selectedTile = selectedTile;
-                    this.selectedPiece.movePiece(selectedTile);  
-                    this.selectedPiece = null;
-                    this.switchPlayers();
+                    if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){
+                        System.out.println("Moving piece");
+                        // Selected a piece and clicked on empty tile -> Move piece to that tile
+                        this.selectedTile = selectedTile;
+                        this.selectedPiece.movePiece(selectedTile);  
+                        this.selectedPiece = null;
+                        this.switchPlayers();
+                    }
                 }
             }
         }
+
+        // Player clicking did not do anything. Reset state
+        selectedPiece = null;
+        selectedTile = null;
 
         System.out.println("Current Player: ");
         System.out.println(currentPlayer.getPlayerColor());
