@@ -55,8 +55,12 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     }
 
     /*
-    **  Add the selected chess piece to the dragging layer so it can be moved
-    */
+     *  if tile is clicked, check piece color, check turn,
+     *   get options for movement
+     *  if tile was clicked with no piece on it, check if a piece was
+     *      clicked before and move it if valid
+     *  if tile is empty, do nothing
+     */
     public void mousePressed(MouseEvent e)
     {   
         Component clickedElement = chessBoard.findComponentAt(e.getX(), e.getY());
@@ -73,7 +77,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                 {
                     System.out.println("Moving piece (Attack)");
                     selectedTile = clickedPiece.getTile();
-                    selectedTile.removePiece();
+                    selectedTile.removePiece(); // BUG / TODO: piece is not getting removed
                     selectedPiece.movePiece(selectedTile);
                     chessBoard.repaint();
                     this.switchPlayers();
@@ -126,13 +130,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     */
     public void mouseReleased(MouseEvent e){}
 
-    /*
-     *  if tile is clicked, check piece color, check turn,
-     *   get options for movement
-     *  if tile was clicked with no piece on it, check if a piece was
-     *  	clicked before and move it if valid
-     *  if tile is empty, do nothing
-     */
     public void mouseClicked(MouseEvent e) {
     }
     public void mouseMoved(MouseEvent e) {

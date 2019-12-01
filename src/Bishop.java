@@ -14,7 +14,6 @@ public class Bishop extends Piece
         super(imageLocation, color, tile);
     }
 
-
     // Return ArrayList of Tiles the Bishop can move to
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
@@ -90,8 +89,6 @@ public class Bishop extends Piece
             currRow++;
             currCol++;
         }
-        
-
         return validMoves;
     }
 
