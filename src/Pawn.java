@@ -29,21 +29,25 @@ public class Pawn extends Piece
         ArrayList<Tile> validMoves = new ArrayList<Tile>();
         int row = this.getRow();
         int col = this.getCol();
-        System.out.println(row);
-        System.out.println(col);
+        boolean notBlockedInFront = false;
 
         // Pawn direction is 1 if BLACK and -1 if WHITE
         int pawnDirection = this.getColor() == "BLACK" ? 1 : -1;
 
         // 1) Add the tile directly in front of the pawn if able
         if (validSpot(board, row, col, row + pawnDirection, col)){
-            validMoves.add(board.getTileAtLocation(row + pawnDirection, col));
+            if (board.getPieceAtLocation(row+pawnDirection, col) == null){
+                validMoves.add(board.getTileAtLocation(row + pawnDirection, col));
+                notBlockedInFront = true;
+            }
         }
 
         // 2) If pawn is on starting position, add the piece two pieces in front if able
         if (this.startingTile == this.getTile()){
             if (validSpot(board, row, col, row + pawnDirection*2, col)){
-                validMoves.add(board.getTileAtLocation(row + pawnDirection*2, col));
+                if (notBlockedInFront && board.getPieceAtLocation(row+pawnDirection*2, col) == null){
+                    validMoves.add(board.getTileAtLocation(row + pawnDirection*2, col));
+                }
             }
         }
 
