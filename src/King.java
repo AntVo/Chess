@@ -24,7 +24,9 @@ public class King extends Piece
     {   
         int row = this.getRow();
         int col = this.getCol();
-
+        System.out.println("======");
+        System.out.println("VALIDATING KING MOVES");
+        System.out.println("======");
         ArrayList<Tile> validMoves = new ArrayList<Tile>();
         int[][] offsets = {
             {-1, -1},
@@ -36,12 +38,13 @@ public class King extends Piece
             {1, 0},
             {1, 1}
         };
+
         for (int[] offset : offsets) {
             if (validSpot(board, row, col, row+offset[0], col+offset[1] )){
                 Tile tileToCheck = board.getTileAtLocation(row+offset[0],col+offset[1]);
-                // if (tileToCheck.isUnderAttack(board, opposingPlayer) == false){
+                if (tileToCheck.isUnderAttack(board, opposingPlayer) == false){
                     validMoves.add(tileToCheck);
-                // }
+                }
             }
         }
         return validMoves;

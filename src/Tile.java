@@ -94,9 +94,20 @@ public class Tile extends JPanel
     // Boolean check if this tile is under attack by opposite player
     public boolean isUnderAttack(ChessBoard chessBoard, Player opposingPlayer){
         ArrayList<Piece> enemyPieces = opposingPlayer.getPieces();
-        for (Piece piece : enemyPieces){
-            System.out.println(piece.getColor());
-            if (piece.getValidMoves(chessBoard).contains(this)){
+        for (Piece enemyPiece : enemyPieces){
+            if (enemyPiece instanceof King){
+                // TODO: handle edge case, so we dont get recursive loop
+                continue;
+            }
+            if (enemyPiece instanceof Pawn){
+                // Handle edge case where pawns would only be able to attack 
+                // the diagonal piece if the King was to move there
+                Pawn enemyPawn = (Pawn)enemyPiece;
+                if (enemyPawn.getAttackMoves(chessBoard).contains(this)){
+                    return true;
+                }
+            }
+            if (enemyPiece.getValidMoves(chessBoard).contains(this)){
                 return true;
             }
         }

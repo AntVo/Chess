@@ -66,4 +66,21 @@ public class Pawn extends Piece
         }
         return validMoves;
     }
+
+
+    // Get the diagonal forward attack moves
+    public ArrayList<Tile> getAttackMoves(ChessBoard board){
+        ArrayList<Tile> attackMoves = new ArrayList<Tile>();
+        int row = this.getRow();
+        int col = this.getCol();
+        int pawnDirection = this.getColor() == "BLACK" ? 1 : -1;
+
+        if (validSpot(board, row, col, row + pawnDirection, col+1 )){
+            attackMoves.add(board.getTileAtLocation(row + pawnDirection, col+1));
+        }
+        if (validSpot(board, row, col, row + pawnDirection, col-1)){
+            attackMoves.add(board.getTileAtLocation(row + pawnDirection, col-1));
+        }
+        return attackMoves;
+    }
 }
