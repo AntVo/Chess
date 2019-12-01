@@ -13,21 +13,6 @@ public class Pawn extends Piece
     {   
         super(imageLocation, color, tile);
     }
-    
-    public ArrayList<Tile> move(Tile tiles[][], int x, int y)
-    {
-    
-    	//find location
-    	
-		//see if it moved
-		//find possible moves (one or two spaces depending on if it moved
-    	//is there anything blocking the way forward
-    	//attack?
-    	//if pawn reaches other side of board
-    	return null;
-    	
-    }
-    
 
     // Return ArrayList of Tiles piece can move to
     public ArrayList<Tile> getValidMoves(ChessBoard board, int row, int col)
