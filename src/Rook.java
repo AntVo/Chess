@@ -19,18 +19,4 @@ public class Rook extends Piece
     {       
         return getValidHorizontalAndVerticalMoves(board);
     }
-
-    
-    @Override
-    public boolean validSpot(ChessBoard board, int rowStart, int colStart, int rowEnd, int colEnd)
-    {
-        if (super.validSpot(board, rowStart, colStart, rowEnd, colEnd) == false)
-            return false;
-  
-        // If spot is on horizontal/vertical it is valid
-        if (rowStart == rowEnd || colStart == colEnd )
-            return true;
-
-        return true; 
-    }
 }

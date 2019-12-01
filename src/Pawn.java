@@ -62,14 +62,4 @@ public class Pawn extends Piece
         }
         return validMoves;
     }
-    
-    @Override
-    public boolean validSpot(ChessBoard board, int colStart, int rowStart, int rowEnd, int colEnd)
-    {
-    	if(super.validSpot(board, colStart, rowStart, rowEnd, colEnd) == false)
-    		return false;
- 
-    	//else if - more rules like attacking
-    	return true;
-    }
 }

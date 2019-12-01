@@ -20,18 +20,4 @@ public class Bishop extends Piece
     {       
         return this.getValidDiagonalMoves(board);
     }
-
-    @Override
-    public boolean validSpot(ChessBoard board, int rowStart, int colStart, int rowEnd, int colEnd)
-    {
-        if (super.validSpot(board, rowStart, colStart, rowEnd, colEnd) == false)
-            return false;
-        
-        // Validate that spot is diagonal
-        // ( delta row and delta col must be equal for diagonal )
-        if (Math.abs(rowStart-rowEnd) != Math.abs(colStart-colEnd))
-            return false;
-
-        return true;        
-    }
 }

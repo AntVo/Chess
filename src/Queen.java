@@ -27,21 +27,4 @@ public class Queen extends Piece
         validMoves.addAll(horizontalAndVerticalMoves);
         return validMoves;
     }
-    
-    @Override
-    public boolean validSpot(ChessBoard board, int rowStart, int colStart, int rowEnd, int colEnd)
-    {
-        if (super.validSpot(board, rowStart, colStart, rowEnd, colEnd) == false)
-            return false;
-        
-        // If spot is diagonal it is valid
-        if (Math.abs(rowStart-rowEnd) == Math.abs(colStart-colEnd) )
-            return true;
-
-        // If spot is on horizontal/vertical it is valid
-        if (rowStart == rowEnd || colStart == colEnd )
-            return true;
-
-        return true; 
-    }
 }

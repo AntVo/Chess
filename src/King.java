@@ -19,5 +19,4 @@ public class King extends Piece
         ArrayList<Tile> validMoves = new ArrayList<Tile>();
         return validMoves;
     }
-
 }
