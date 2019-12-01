@@ -83,7 +83,9 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                     this.switchPlayers();
                     selectedPiece = null;
                     selectedTile = null;
+                    chessBoard.removeAllHighlights();
                 }
+                return;
             }
 
             // TODO: Handle when user has not yet selected a piece and clicks on a piece
