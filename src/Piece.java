@@ -12,7 +12,7 @@ public abstract class Piece extends JLabel
     String color;
     Tile currentTile;
     String imageLocation;
-    
+
     public Piece(String imageLocation, String color, Tile tile) {
     	super();
         this.setIcon(new ImageIcon(imageLocation));

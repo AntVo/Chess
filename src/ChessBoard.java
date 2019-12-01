@@ -16,12 +16,16 @@ public class ChessBoard extends JPanel
     // represented as a matrix of Tiles that contains pieces
     private Tile[][] chessBoard;
     private Dimension boardSize;
+    private Player playerOne;
+    private Player playerTwo;
 
-    public ChessBoard(Dimension boardSize)
+    public ChessBoard(Dimension boardSize, Player p1, Player p2)
     {
         super();
         this.chessBoard = new Tile[8][8];
         this.boardSize = boardSize;
+        this.playerOne = p1;
+        this.playerTwo = p2;
     }
 
 
@@ -60,32 +64,32 @@ public class ChessBoard extends JPanel
         int row = 0;
         for (int i = 0; i < 8; i++){
             Tile tileToAddPiece = this.chessBoard[row][i];
-            this.createPiece(chessRow[i], BLACK, tileToAddPiece);
+            this.createPiece(chessRow[i], BLACK, tileToAddPiece, playerTwo);
         }
 
         // (2) Set the row of black pawns
         row = 1;
         for (int i = 0; i < 8; i++){
             Tile tileToAddPiece = this.chessBoard[row][i];
-            this.createPiece(PAWN, BLACK, tileToAddPiece);
+            this.createPiece(PAWN, BLACK, tileToAddPiece, playerTwo);
         }
 
         // (3) Set the row of white pawns
         row = 6;
         for (int i = 0; i < 8; i++){
             Tile tileToAddPiece = this.chessBoard[row][i];
-            this.createPiece(PAWN, WHITE, tileToAddPiece);
+            this.createPiece(PAWN, WHITE, tileToAddPiece, playerOne);
         }        
 
         // (4) Set the row of white pieces
         row = 7;
         for (int i = 0; i < 8; i++){
             Tile tileToAddPiece = this.chessBoard[row][i];
-            this.createPiece(chessRow[i], WHITE, tileToAddPiece);
+            this.createPiece(chessRow[i], WHITE, tileToAddPiece, playerOne);
         }        
     }
 
-    public Piece createPiece(String pieceName, String pieceColor, Tile pieceTile){
+    public Piece createPiece(String pieceName, String pieceColor, Tile pieceTile, Player player){
         Piece newPiece = null;
         String imgLocation = null;
         switch(pieceName){
@@ -107,12 +111,16 @@ public class ChessBoard extends JPanel
                 break;
             case KING:
                 imgLocation = pieceColor == WHITE ? WHITE_KING_PNG : BLACK_KING_PNG;
-                newPiece = new King(imgLocation, pieceColor, pieceTile);
+                // King needs to know the opponent player to do check calculations
+                Player oppPlayer = player == playerOne ? playerTwo : playerOne;
+                newPiece = new King(imgLocation, pieceColor, pieceTile, oppPlayer);
                 break;
+
             case PAWN:
                 imgLocation = pieceColor == WHITE ? WHITE_PAWN_PNG : BLACK_PAWN_PNG;
                 newPiece = new Pawn(imgLocation, pieceColor, pieceTile);
         }
+        player.addPiece(newPiece);
         return newPiece;
     }
     

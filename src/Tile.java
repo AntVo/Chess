@@ -90,4 +90,16 @@ public class Tile extends JPanel
     public boolean isEmpty(){
         return this.piece == null;
     }
+
+    // Boolean check if this tile is under attack by opposite player
+    public boolean isUnderAttack(ChessBoard chessBoard, Player opposingPlayer){
+        ArrayList<Piece> enemyPieces = opposingPlayer.getPieces();
+        for (Piece piece : enemyPieces){
+            System.out.println(piece.getColor());
+            if (piece.getValidMoves(chessBoard).contains(this)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

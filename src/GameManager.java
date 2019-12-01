@@ -19,14 +19,13 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     Player playerOne = new Player("Player One", WHITE );
     Player playerTwo = new Player("Player Two", BLACK );
 
-    // 
     public void initializeGame(){
         Dimension boardSize = new Dimension(600, 600);
 
         this.graphicsSetup(boardSize);
 
         // Initialize Chessboard
-        chessBoard = new ChessBoard(boardSize);
+        chessBoard = new ChessBoard(boardSize, playerOne, playerTwo);
         chessBoard.initializeChessBoard();
         chessBoard.initializeChessPieces();
         currentPlayer = playerOne;
@@ -68,6 +67,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         // Handle user clicking on a piece
         if (clickedElement instanceof Piece){
             Piece clickedPiece =  (Piece)clickedElement;
+            selectedTile = clickedPiece.getTile();
 
             // Handle when:
             //   (1) Player has already selected a piece 
@@ -75,15 +75,16 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             if (this.selectedPiece != null){
                 if(clickedPiece.color != currentPlayer.getPlayerColor())
                 {
-                    System.out.println("Moving piece (Attack)");
-                    selectedTile = clickedPiece.getTile();
-                    selectedTile.removePiece(); // BUG / TODO: piece is not getting removed
-                    selectedPiece.movePiece(selectedTile);
-                    chessBoard.repaint();
-                    this.switchPlayers();
-                    selectedPiece = null;
-                    selectedTile = null;
-                    chessBoard.removeAllHighlights();
+                    if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){
+                        System.out.println("Moving piece (Attack)");
+                        selectedTile.removePiece(); // BUG / TODO: piece is not getting removed
+                        selectedPiece.movePiece(selectedTile);
+                        chessBoard.repaint();
+                        this.switchPlayers();
+                        selectedPiece = null;
+                        selectedTile = null;
+                        chessBoard.removeAllHighlights();
+                    }
                 }
                 return;
             }
@@ -134,8 +135,8 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 
     /*
     **  Drop the chess piece back onto the chess board
-    * 	Arman - Do we even need this? cant we just click, and click again?
-    *  	i.e.	We could probably just use mouseClicked
+    *   Arman - Do we even need this? cant we just click, and click again?
+    *   i.e.    We could probably just use mouseClicked
     *  maybe we can implement both later, if we have time
     */
     public void mouseReleased(MouseEvent e){}
@@ -149,6 +150,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     public void mouseExited(MouseEvent e) {
     }
 
+
     public void switchPlayers(){
         this.currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
     }
@@ -156,7 +158,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     public static void main(String[] args)
     {
         
-
         GameManager gameManager = new GameManager();
         gameManager.initializeGame();
     }

@@ -31,6 +31,7 @@ public class Knight extends Piece
             {-1, -2},
             {-2, -1}
         };
+        
         for (int[] offset : offsets) {
             if (validSpot(board, row, col, row+offset[0], col+offset[1] )){
                 validMoves.add(board.getTileAtLocation(row+offset[0],col+offset[1]));
