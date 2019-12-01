@@ -25,7 +25,6 @@ public class Queen extends Piece
          
         validMoves.addAll(verticalMoves);
         validMoves.addAll(horizontalAndVerticalMoves);
-        System.out.println(validMoves);
         return validMoves;
     }
     
@@ -43,7 +42,6 @@ public class Queen extends Piece
         if (rowStart == rowEnd || colStart == colEnd )
             return true;
 
-
-        return true;        
+        return true; 
     }
 }

@@ -17,8 +17,20 @@ public class Rook extends Piece
     // Return ArrayList of Tiles piece can move to
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
+        return getValidHorizontalAndVerticalMoves(board);
+    }
 
-        ArrayList<Tile> validMoves = new ArrayList<Tile>();
-        return validMoves;
+    
+    @Override
+    public boolean validSpot(ChessBoard board, int rowStart, int colStart, int rowEnd, int colEnd)
+    {
+        if (super.validSpot(board, rowStart, colStart, rowEnd, colEnd) == false)
+            return false;
+  
+        // If spot is on horizontal/vertical it is valid
+        if (rowStart == rowEnd || colStart == colEnd )
+            return true;
+
+        return true; 
     }
 }
