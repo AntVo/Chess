@@ -101,6 +101,8 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             selectedTile = (Tile)clickedElement;
 
             // Handle moving a piece:
+            // TODO: ONLY ALLOW THE MOVE IF IT IS A VALID ONE
+            // ex: if (Tile is in Piece.getValidMoves())
             if (this.selectedPiece != null){
                 if (this.selectedPiece.getColor() == currentPlayer.getPlayerColor()){
                     System.out.println("Moving piece");
