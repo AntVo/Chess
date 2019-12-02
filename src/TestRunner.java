@@ -6,11 +6,6 @@ public class TestRunner {
 
     public static void main(String[] args)
     {
-            System.out.println("");
-            System.out.println("========================");
-            System.out.println("Running Entire Test Suite");
-            System.out.println("========================");
-
             PieceTester pieceTester = new PieceTester();
             pieceTester.runTests();
 
@@ -19,5 +14,7 @@ public class TestRunner {
 
             TileTester tileTester = new TileTester();
             tileTester.runTests();
+
+            System.out.println("Finished Running Tests");
     }
 }
