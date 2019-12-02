@@ -200,15 +200,14 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         }
 
         if (chessBoard.isCheckmated(playerOne)){
-            JLabel label1 = new JLabel("Test");
-            label1.setText("Label Text");
-
+            JOptionPane.showMessageDialog(null, "Checkmate! Player Two Wins! Thanks for playing.", "Checkmate!", JOptionPane.ERROR_MESSAGE);
             System.out.println("===============");
             System.out.println("CHECKMATE!");
             System.out.println("Player Two Wins");
 
         }
         if (chessBoard.isCheckmated(playerTwo)){
+            JOptionPane.showMessageDialog(null, "Checkmate! Player One Wins! Thanks for playing.","Checkmate!", JOptionPane.ERROR_MESSAGE);
             System.out.println("===============");
             System.out.println("CHECKMATE!");
             System.out.println("Player One Wins");

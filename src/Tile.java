@@ -27,6 +27,7 @@ public class Tile extends JPanel
     {
         super();
         this.setLayout(new BorderLayout());
+        this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.piece = null;
         this.row = row;
         this.col = col;
