@@ -9,8 +9,8 @@ import javax.swing.*;
 */
 public class GameManager extends JFrame implements MouseListener, MouseMotionListener
 {   
-    Help help;
     MainMenu mainMenu;
+    Help help;
 
     // The entire game is drawn on top of this layeredPanel
 	Player currentPlayer = null;
@@ -35,20 +35,19 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         chessBoard.initializeChessPieces();
         currentPlayer = playerOne;
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+        chessBoard.setVisible(false);
 
         // Initialize Help Screen
         help = new Help();
         layeredPane.add(help.frame, JLayeredPane.DEFAULT_LAYER);
+        help.setVisible(false);
 
         // Initialize Main Menu
         mainMenu = new MainMenu( chessBoard, help);
         layeredPane.add(mainMenu.frame, JLayeredPane.DEFAULT_LAYER);
         help.setMenu(mainMenu);
 
-
         mainMenu.setVisible(true);
-        chessBoard.setVisible(false);
-        help.setVisible(false);
     }
 
 
@@ -201,6 +200,9 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         }
 
         if (chessBoard.isCheckmated(playerOne)){
+            JLabel label1 = new JLabel("Test");
+            label1.setText("Label Text");
+
             System.out.println("===============");
             System.out.println("CHECKMATE!");
             System.out.println("Player Two Wins");
