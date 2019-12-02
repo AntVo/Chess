@@ -51,8 +51,10 @@ public class King extends Piece
                     validMoves.add(tileToCheck);
 
                 // Add back the temporarily removed piece
-                if (originalPiece != null)
+                if (originalPiece != null){
                     tileToCheck.setPiece(originalPiece);
+                    originalPiece.movePiece(tileToCheck);
+                }
             }
         }
         return validMoves;

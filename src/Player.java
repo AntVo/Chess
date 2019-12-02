@@ -9,6 +9,7 @@ public class Player
     private String playerColor;
     private ArrayList<Piece> pieces;
     private Piece myKing;
+    public boolean isChecked = false;
 
     public Player(String name, String playerColor)
     {

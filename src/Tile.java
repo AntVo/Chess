@@ -11,10 +11,8 @@ public class Tile extends JPanel
 {
 	//Defined variables.
     public Piece piece; // Null if empty
-    private String tileColor; 
+    private Color tileColor; 
     private String notation = "";
-    public String WHITE = "white";
-    public String BLACK = "black";
     private int row;
     private int col;
 
@@ -23,22 +21,16 @@ public class Tile extends JPanel
         super(borderLayout);
         this.piece = null;
     }
-        
-    public Tile(BorderLayout borderLayout, String tileColor)
-    {
-        super(borderLayout);
-        this.piece = null;
-        this.tileColor = tileColor;
-    }
 
     //Constructor
-    public Tile(BorderLayout borderLayout, int row, int col)
+    public Tile(BorderLayout borderLayout, Color color, int row, int col)
     {
 
         this.piece = null;
         this.row = row;
         this.col = col;
-
+        this.tileColor = color;
+        this.setBackground(color);
         // TODO: please comment what this does
         this.notation = Character.toString((char)(97+row));
         this.notation += (char)(col+48+1);
@@ -52,10 +44,13 @@ public class Tile extends JPanel
         return this.col;
     }
 
-    // Returns color
-    public String getColor()
+    public Color  getTileColor()
     {
     	return this.tileColor;
+    }
+
+    public void setDefaultColor(){
+        this.setBackground(this.tileColor);
     }
     
     public void setColor(Color color)
@@ -94,6 +89,12 @@ public class Tile extends JPanel
     // Boolean check if this tile is under attack by opposite player
     public boolean isUnderAttack(ChessBoard chessBoard, Player opposingPlayer){
         ArrayList<Piece> enemyPieces = opposingPlayer.getPieces();
+        boolean isAttacked = false;
+
+        Piece originalPiece = this.getPiece();
+        if (originalPiece != null)
+            this.removePiece();
+
         for (Piece enemyPiece : enemyPieces){
             if (enemyPiece instanceof King){
                 // TODO: handle edge case, so we dont get recursive loop
@@ -104,13 +105,23 @@ public class Tile extends JPanel
                 // the diagonal piece if the King was to move there
                 Pawn enemyPawn = (Pawn)enemyPiece;
                 if (enemyPawn.getAttackMoves(chessBoard).contains(this)){
-                    return true;
+                    isAttacked = true;
                 }
             }
             if (enemyPiece.getValidMoves(chessBoard).contains(this)){
-                return true;
+                isAttacked = true;
             }
         }
-        return false;
+
+        // Add back the temporarily removed piece
+        if (originalPiece != null){
+            this.setPiece(originalPiece);
+            originalPiece.movePiece(this);
+        }
+
+        return isAttacked;
     }
+
+    final Color LIGHT_BROWN = new Color(153, 102, 0);
+    final Color DARK_BROWN = new Color(102, 51, 0);
 }

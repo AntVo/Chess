@@ -48,9 +48,8 @@ public class ChessBoard extends JPanel
         // Iterate over a matrix and create colored tiles
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                Tile tile = new Tile( new BorderLayout(), i, j);
-
-                tile.setBackground( i % 2 == j % 2 ? DARK_BROWN : LIGHT_BROWN);
+                Color tileColor = i % 2 == j % 2 ? DARK_BROWN : LIGHT_BROWN;
+                Tile tile = new Tile( new BorderLayout(), tileColor, i, j);
                 this.chessBoard[i][j] = tile;
                 this.add(tile);
             }
@@ -159,9 +158,8 @@ public class ChessBoard extends JPanel
         Player opponent = player == playerOne ? playerTwo : playerOne;
         Piece playersKing = player.getKing();
         Tile kingsTile = playersKing.getTile();
-        
+
         if (kingsTile.isUnderAttack(this, opponent)){
-            kingsTile.setColor(LIGHT_RED);
             return true;
         }
         return false;

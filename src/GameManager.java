@@ -79,22 +79,23 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                         System.out.println("Moving piece (Attack)");
                         selectedTile.removePiece(); // BUG / TODO: piece is not getting removed
                         selectedPiece.movePiece(selectedTile);
-                        chessBoard.repaint();
                         this.switchPlayers();
                         selectedPiece = null;
                         selectedTile = null;
                         chessBoard.removeAllHighlights();
+                        this.makeBoardstateChecks();
+                        chessBoard.repaint();
                     }
                 }
                 return;
             }
 
-            // TODO: Handle when user has not yet selected a piece and clicks on a piece
             if (clickedPiece.color == currentPlayer.getPlayerColor()){
                 this.selectedPiece = clickedPiece;
                 chessBoard.highlightAvailableMoves(clickedPiece);
                 selectedPiece.getTile().highlightSelf();
             }
+
             return;
         }
 
@@ -104,39 +105,74 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             selectedTile = (Tile)clickedElement;
 
             // Handle moving a piece:
-            // TODO: ONLY ALLOW THE MOVE IF IT IS A VALID ONE
-            // ex: if (Tile is in Piece.getValidMoves())
             if (this.selectedPiece != null){
+                // The piece is the current players color
                 if (this.selectedPiece.getColor() == currentPlayer.getPlayerColor()){
+                    
+
+                    // Otherwise, the move is a valid one
                     if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){
+
+                        // Validate that the move would put the opponent out of check
+                        Tile originalTile = this.selectedPiece.getTile();
+                        this.selectedPiece.movePiece(selectedTile);  
+                        if (chessBoard.isChecked(currentPlayer)){
+                            // Player is still checked after the move. Don't allow it
+                            // (by reverting the move)
+                            this.selectedPiece.movePiece(originalTile);
+                            selectedPiece = null;
+                            selectedTile = null;
+                            return; // Move wouldnt put opponent out of check. Ignore
+                        }
+
+                        // Validate that move wouldnt put opponent into check
+                            
+
+
                         System.out.println("Moving piece");
                         // Selected a piece and clicked on empty tile -> Move piece to that tile
-                        this.selectedTile = selectedTile;
                         this.selectedPiece.movePiece(selectedTile);  
                         this.selectedPiece = null;
                         this.switchPlayers();
+                        this.makeBoardstateChecks();
                     }
                 }
             }
         }
 
 
-        // Look for Check/Checkmates in boardstate after every action
-        System.out.println("CHECK AND CHECKMATES:");
-        System.out.println(chessBoard.isChecked(playerOne));
-        System.out.println(chessBoard.isCheckmated(playerOne));        
-        System.out.println(chessBoard.isChecked(playerTwo));
-        System.out.println(chessBoard.isCheckmated(playerTwo));   
-
         // Player clicking did not do anything. Reset state
         selectedPiece = null;
         selectedTile = null;
 
-        System.out.println("Current Player: ");
-        System.out.println(currentPlayer.getPlayerColor());
+        // System.out.println("Current Player: ");
+        // System.out.println(currentPlayer.getPlayerColor());
     }
 
+    public void makeBoardstateChecks(){
+        playerOne.isChecked = chessBoard.isChecked(playerOne) ? true : false;
+        if (playerOne.isChecked){
+            playerOne.getKing().getTile().setColor(RED);
+        } else {
+            playerOne.getKing().getTile().setDefaultColor();
+        }
 
+        playerTwo.isChecked = chessBoard.isChecked(playerTwo) ? true : false;
+        if (playerTwo.isChecked){
+            playerTwo.getKing().getTile().setColor(RED);
+        } else {
+            playerTwo.getKing().getTile().setDefaultColor();
+        }
+
+        if (chessBoard.isCheckmated(playerOne)){
+            System.out.println("Player Two Wins");
+            // TODO: Player two wins!
+        }
+        if (chessBoard.isCheckmated(playerTwo)){
+            System.out.println("Player One Wins");
+            // TODO: Player one wins!
+        }
+    }
 
     /*
     **  Move the chess piece around. Bonus if we have time. 
@@ -176,4 +212,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     // Enums
     private static final String BLACK = "BLACK";
     private static final String WHITE = "WHITE";
+    private static final Color RED = new Color(180, 40, 40);
+
 }
