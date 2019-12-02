@@ -74,7 +74,7 @@ public class Pawn extends Piece
         int row = this.getRow();
         int col = this.getCol();
         int pawnDirection = this.getColor() == "BLACK" ? 1 : -1;
-
+        
         if (validSpot(board, row, col, row + pawnDirection, col+1 )){
             attackMoves.add(board.getTileAtLocation(row + pawnDirection, col+1));
         }

@@ -75,7 +75,11 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             if (this.selectedPiece != null){
                 if(clickedPiece.color != currentPlayer.getPlayerColor())
                 {
-                    if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){
+                    if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){                        
+                        Player opponent = currentPlayer == playerOne ? playerTwo : playerOne;
+                        opponent.removePiece(clickedPiece);
+
+
                         selectedTile.removePiece();
                         selectedPiece.movePiece(selectedTile);
                         this.switchPlayers();
@@ -84,6 +88,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                         chessBoard.removeAllHighlights();
                         this.makeBoardstateChecks();
                         chessBoard.repaint();
+
                     }
                 }
                 return;
