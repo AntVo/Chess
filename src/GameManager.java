@@ -12,10 +12,8 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 	Player currentPlayer = null;
     JLayeredPane layeredPane;
     ChessBoard chessBoard;
-
     Piece selectedPiece = null;
     Tile selectedTile = null;
-    
     Player playerOne = new Player("Player One", WHITE );
     Player playerTwo = new Player("Player Two", BLACK );
 
@@ -69,7 +67,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             Piece clickedPiece =  (Piece)clickedElement;
             selectedTile = clickedPiece.getTile();
 
-            // Handle when:
+            // Handle attacks (when):
             //   (1) Player has already selected a piece 
             //   (2) Player clicks on a piece that is not theirs
             if (this.selectedPiece != null){
@@ -78,30 +76,11 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                     if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){                        
                         Player opponent = currentPlayer == playerOne ? playerTwo : playerOne;
                         opponent.removePiece(clickedPiece);
-
-
                         selectedTile.removePiece();
                         selectedPiece.movePiece(selectedTile);
-                        
-                        if(selectedPiece instanceof Pawn)
-                        {
-                        	if(currentPlayer.getPlayerColor() == "BLACK" && selectedTile.getRow() == 7)
-                        	{
-                        		selectedTile.removePiece();
-                        		chessBoard.createPiece("QUEEN", BLACK, selectedTile, playerTwo);
-                        		chessBoard.repaint();
-                        		System.out.println("repainted");
+                        chessBoard.repaint();
 
-                        	}
-                        	if(currentPlayer.getPlayerColor() == "WHITE" && selectedTile.getRow() == 0)
-                        	{                        		
-                        		selectedTile.removePiece();
-                        		chessBoard.createPiece("QUEEN", WHITE, selectedTile, playerOne);
-                        		chessBoard.repaint();
-                        		System.out.println("repainted");
-
-                        	}
-                        }
+                        this.checkAndMakePromotions(selectedPiece);
 
                         
                         this.switchPlayers();
@@ -142,55 +121,13 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                         // Validate that the move would put the opponent out of check
                         Tile originalTile = this.selectedPiece.getTile();
                         this.selectedPiece.movePiece(selectedTile);  
-                        
-                        if(selectedPiece instanceof Pawn)
-                        {
-                        	if(currentPlayer.getPlayerColor() == "BLACK" && selectedTile.getRow() == 7)
-                        	{
-                        		selectedTile.removePiece();
-                        		chessBoard.createPiece("QUEEN", BLACK, selectedTile, playerTwo);
-                        		chessBoard.repaint();
-                        		System.out.println("repainted");
-
-                        	}
-                        	if(currentPlayer.getPlayerColor() == "WHITE" && selectedTile.getRow() == 0)
-                        	{                        		
-                        		selectedTile.removePiece();
-                        		chessBoard.createPiece("QUEEN", WHITE, selectedTile, playerOne);
-                        		chessBoard.repaint();
-                        		System.out.println("repainted");
-
-                        	}
-                        }
+                        this.checkAndMakePromotions(selectedPiece);
 
                         
                         if (chessBoard.isChecked(currentPlayer)){
                             // Player is still checked after the move. Don't allow it
                             // (by reverting the move)
-                            this.selectedPiece.movePiece(originalTile);
-                            
-                            if(selectedPiece instanceof Pawn)
-                            {
-
-                            	if(currentPlayer.getPlayerColor() == "BLACK" && selectedTile.getRow() == 7)
-                            	{
-                            		selectedTile.removePiece();
-                            		chessBoard.createPiece("QUEEN", BLACK, selectedTile, playerTwo);
-                            		chessBoard.repaint();
-                            		System.out.println("repainted");
-
-                            	}
-                            	if(currentPlayer.getPlayerColor() == "WHITE" && selectedTile.getRow() == 0)
-                            	{                        		
-                            		selectedTile.removePiece();
-                            		chessBoard.createPiece("QUEEN", WHITE, selectedTile, playerOne);
-                            		chessBoard.repaint();
-                            		System.out.println("repainted");
-
-                            	}
-                            }
-
-                            
+                            this.selectedPiece.movePiece(originalTile);                            
                             selectedPiece = null;
                             selectedTile = null;
                             return; // Move wouldnt put opponent out of check. Ignore
@@ -200,27 +137,9 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                         System.out.println("Moving piece");
                         // Selected a piece and clicked on empty tile -> Move piece to that tile
                         this.selectedPiece.movePiece(selectedTile);  
-                        
-                        if(selectedPiece instanceof Pawn)
-                        {
-
-                        	if(currentPlayer.getPlayerColor() == "BLACK" && selectedTile.getRow() == 7)
-                        	{
-                        		selectedTile.removePiece();
-                        		chessBoard.createPiece("QUEEN", BLACK, selectedTile, playerTwo);
-                        		chessBoard.repaint();
-                        		System.out.println("repainted");
-
-                        	}
-                        	if(currentPlayer.getPlayerColor() == "WHITE" && selectedTile.getRow() == 0)
-                        	{                        		
-                        		selectedTile.removePiece();
-                        		chessBoard.createPiece("QUEEN", WHITE, selectedTile, playerOne);
-                        		chessBoard.repaint();
-                        		System.out.println("repainted");
-
-                        	}
-                        }
+                        this.checkAndMakePromotions(selectedPiece);
+    
+                    
                         
                         this.selectedPiece = null;
                         this.switchPlayers();
@@ -262,6 +181,28 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         if (chessBoard.isCheckmated(playerTwo)){
             System.out.println("Player One Wins");
             // TODO: Player one wins!
+        }
+    }
+
+    public void checkAndMakePromotions(Piece piece){
+        chessBoard.repaint();
+
+        if(piece instanceof Pawn)
+        {
+            String color = currentPlayer.getPlayerColor();
+            if((color == "BLACK" && selectedTile.getRow() == 7) ||
+                (color == "WHITE" && selectedTile.getRow() == 0))
+            {
+
+                currentPlayer.removePiece(piece);
+                selectedTile.removePiece();
+                Piece queen = (Queen)chessBoard.createPiece("QUEEN", color, selectedTile, currentPlayer);
+                selectedTile.add(queen);
+                queen.movePiece(selectedTile);
+                queen.validate();
+                selectedTile.validate();
+                System.out.println("repainted");
+            }
         }
     }
 

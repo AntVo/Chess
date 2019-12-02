@@ -16,6 +16,8 @@ public abstract class Piece extends JLabel
     public Piece(String imageLocation, String color, Tile tile) {
     	super();
         this.setIcon(new ImageIcon(imageLocation));
+        this.setHorizontalAlignment(JLabel.CENTER);
+        this.setVerticalAlignment(JLabel.CENTER);
         this.imageLocation = imageLocation;
         this.color = color;
         this.currentTile = tile;

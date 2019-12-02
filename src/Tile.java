@@ -16,21 +16,23 @@ public class Tile extends JPanel
     private int row;
     private int col;
 
-    public Tile(BorderLayout borderLayout)
+    public Tile()
     {
-        super(borderLayout);
+        super();
         this.piece = null;
     }
 
     //Constructor
-    public Tile(BorderLayout borderLayout, Color color, int row, int col)
+    public Tile(Color color, int row, int col)
     {
-
+        super();
+        this.setLayout(new BorderLayout());
         this.piece = null;
         this.row = row;
         this.col = col;
         this.tileColor = color;
         this.setBackground(color);
+
         // TODO: please comment what this does
         this.notation = Character.toString((char)(97+row));
         this.notation += (char)(col+48+1);
