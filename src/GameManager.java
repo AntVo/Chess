@@ -153,7 +153,8 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         playerOne.isChecked = chessBoard.isChecked(playerOne) ? true : false;
         if (playerOne.isChecked){
             playerOne.getKing().getTile().setColor(RED);
-        } else {
+        }
+        else {
             playerOne.getKing().getTile().setDefaultColor();
         }
 

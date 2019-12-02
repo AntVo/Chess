@@ -15,7 +15,6 @@ public class Bishop extends Piece
     }
 
     // Return ArrayList of Tiles the Bishop can move to
-    @Override
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
         return this.getValidDiagonalMoves(board);

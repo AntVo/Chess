@@ -12,7 +12,7 @@ public abstract class Piece extends JLabel
     String color;
     Tile currentTile;
     String imageLocation;
-
+    boolean hasMoved;
     public Piece(String imageLocation, String color, Tile tile) {
     	super();
         this.setIcon(new ImageIcon(imageLocation));
@@ -21,6 +21,7 @@ public abstract class Piece extends JLabel
         this.currentTile = tile;
         this.currentTile.setPiece(this);
         this.currentTile.add(this);
+        this.hasMoved = false;
     }
     
     public String getColor(){
@@ -51,7 +52,7 @@ public abstract class Piece extends JLabel
         this.currentTile.setPiece(this);
         this.currentTile.add(this);
         this.setIcon(new ImageIcon(this.imageLocation));
-
+        this.hasMoved = true;
     }
 
     // Return ArrayList of Tiles piece can move to
@@ -106,7 +107,6 @@ public abstract class Piece extends JLabel
                 return false;
             }
         }
-
     	return true;
     }
     

@@ -7,7 +7,6 @@ public class King extends Piece
 {
     Player opposingPlayer;
 
-
     public King(String imageLocation, String color, Tile tile, Player oppPlayer)
     {   
         super(imageLocation, color, tile);
