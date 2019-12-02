@@ -71,6 +71,13 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
             //   (1) Player has already selected a piece 
             //   (2) Player clicks on a piece that is not theirs
             if (this.selectedPiece != null){
+            	//Deselection
+            	if(clickedPiece.color == currentPlayer.getPlayerColor())
+            	{
+            		selectedPiece = null;
+            		selectedTile = null;
+            		chessBoard.removeAllHighlights();
+            	}            	
                 if(clickedPiece.color != currentPlayer.getPlayerColor())
                 {
                     if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){                        
