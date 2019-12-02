@@ -203,6 +203,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                 Piece queen = (Queen)chessBoard.createPiece("QUEEN", color, selectedTile, currentPlayer);
                 selectedTile.add(queen);
                 queen.movePiece(selectedTile);
+                selectedTile.validate();
             }
         }
     }
