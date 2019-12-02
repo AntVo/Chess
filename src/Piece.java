@@ -13,6 +13,7 @@ public abstract class Piece extends JLabel
     Tile currentTile;
     String imageLocation;
     boolean hasMoved;
+    
     public Piece(String imageLocation, String color, Tile tile) {
     	super();
         this.setIcon(new ImageIcon(imageLocation));

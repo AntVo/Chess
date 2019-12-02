@@ -166,11 +166,38 @@ public class ChessBoard extends JPanel
     }
 
     public boolean isCheckmated(Player player){
-        Piece playersKing = player.getKing();
-        if (playersKing.getValidMoves(this).isEmpty() && isChecked(player)){
-            return true;
+        if (!(isChecked(player))){
+            return false;
         }
-        return false;
+
+        Piece tempPiece = null;
+        Player opponent = player == playerOne ? playerTwo : playerOne;
+        boolean result = true;
+        for (Piece piece : player.getPieces()){
+            for (Tile tileToCheck : piece.getValidMoves(this)){
+
+                // Temporarily remove any piece on the tile we are going to check
+                Tile originalTile = piece.getTile();
+                Piece originalPiece = tileToCheck.getPiece();
+                if (originalPiece != null){
+                    tileToCheck.removePiece();
+                }
+                piece.movePiece(tileToCheck);
+
+                if (!(isChecked(player))){
+                    result = false;
+                }
+
+                // // Add back the temporarily removed piece
+                if (originalPiece != null){
+                    tileToCheck.setPiece(originalPiece);
+                    originalPiece.movePiece(tileToCheck);
+                }
+                piece.movePiece(originalTile);
+
+            }
+        }
+        return result;
     }
 
     final Color LIGHT_BROWN = new Color(153, 102, 0);
@@ -187,17 +214,17 @@ public class ChessBoard extends JPanel
     private static final String PAWN = "PAWN";
     private static final String WHITE = "WHITE";
     private static final String BLACK = "BLACK";
-    private static final String WHITE_BISHOP_PNG = "assets/pieces/white_bishop.png";
-    private static final String BLACK_BISHOP_PNG = "assets/pieces/black_bishop.png";
-    private static final String WHITE_KNIGHT_PNG = "assets/pieces/white_knight.png";
-    private static final String BLACK_KNIGHT_PNG ="assets/pieces/black_knight.png";
-    private static final String WHITE_ROOK_PNG = "assets/pieces/white_rook.png";
-    private static final String BLACK_ROOK_PNG = "assets/pieces/black_rook.png";
-    private static final String WHITE_KING_PNG = "assets/pieces/white_king.png";
-    private static final String BLACK_KING_PNG = "assets/pieces/black_king.png";
-    private static final String BLACK_QUEEN_PNG = "assets/pieces/black_queen.png";
-    private static final String WHITE_QUEEN_PNG = "assets/pieces/white_queen.png";
-    private static final String WHITE_PAWN_PNG = "assets/pieces/white_pawn.png";
-    private static final String BLACK_PAWN_PNG = "assets/pieces/black_pawn.png";
+    private static final String WHITE_BISHOP_PNG = "../assets/pieces/white_bishop.png";
+    private static final String BLACK_BISHOP_PNG = "../assets/pieces/black_bishop.png";
+    private static final String WHITE_KNIGHT_PNG = "../assets/pieces/white_knight.png";
+    private static final String BLACK_KNIGHT_PNG ="../assets/pieces/black_knight.png";
+    private static final String WHITE_ROOK_PNG = "../assets/pieces/white_rook.png";
+    private static final String BLACK_ROOK_PNG = "../assets/pieces/black_rook.png";
+    private static final String WHITE_KING_PNG = "../assets/pieces/white_king.png";
+    private static final String BLACK_KING_PNG = "../assets/pieces/black_king.png";
+    private static final String BLACK_QUEEN_PNG = "../assets/pieces/black_queen.png";
+    private static final String WHITE_QUEEN_PNG = "../assets/pieces/white_queen.png";
+    private static final String WHITE_PAWN_PNG = "../assets/pieces/white_pawn.png";
+    private static final String BLACK_PAWN_PNG = "../assets/pieces/black_pawn.png";
 
 }

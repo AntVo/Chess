@@ -88,7 +88,6 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                         chessBoard.repaint();
 
                         this.checkAndMakePromotions(selectedPiece);
-
                         
                         this.switchPlayers();
                         selectedPiece = null;
@@ -141,12 +140,9 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                         }
     
 
-                        System.out.println("Moving piece");
                         // Selected a piece and clicked on empty tile -> Move piece to that tile
                         this.selectedPiece.movePiece(selectedTile);  
                         this.checkAndMakePromotions(selectedPiece);
-    
-                    
                         
                         this.selectedPiece = null;
                         this.switchPlayers();
@@ -182,12 +178,15 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         }
 
         if (chessBoard.isCheckmated(playerOne)){
+            System.out.println("===============");
+            System.out.println("CHECKMATE!");
             System.out.println("Player Two Wins");
-            // TODO: Player two wins!
+
         }
         if (chessBoard.isCheckmated(playerTwo)){
+            System.out.println("===============");
+            System.out.println("CHECKMATE!");
             System.out.println("Player One Wins");
-            // TODO: Player one wins!
         }
     }
 
