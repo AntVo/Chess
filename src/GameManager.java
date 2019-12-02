@@ -9,6 +9,9 @@ import javax.swing.*;
 */
 public class GameManager extends JFrame implements MouseListener, MouseMotionListener
 {   
+    Help help;
+    MainMenu mainMenu;
+
     // The entire game is drawn on top of this layeredPanel
 	Player currentPlayer = null;
     JLayeredPane layeredPane;
@@ -31,10 +34,23 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         chessBoard.initializeChessBoard();
         chessBoard.initializeChessPieces();
         currentPlayer = playerOne;
-
-        // Render the chessBoard by adding it to our JFrame
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+
+        // Initialize Help Screen
+        help = new Help();
+        layeredPane.add(help.frame, JLayeredPane.DEFAULT_LAYER);
+
+        // Initialize Main Menu
+        mainMenu = new MainMenu( chessBoard, help);
+        layeredPane.add(mainMenu.frame, JLayeredPane.DEFAULT_LAYER);
+        help.setMenu(mainMenu);
+
+
+        mainMenu.setVisible(true);
+        chessBoard.setVisible(false);
+        help.setVisible(false);
     }
+
 
     /**
      * Perform necessary actions to setup a jframe to render the game
@@ -232,6 +248,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     {   
         GameManager gameManager = new GameManager();
         gameManager.initializeGame();
+
     }
 
     private static final String BLACK = "BLACK";
