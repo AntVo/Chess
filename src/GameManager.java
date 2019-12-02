@@ -76,8 +76,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                 if(clickedPiece.color != currentPlayer.getPlayerColor())
                 {
                     if (this.selectedPiece.getValidMoves(chessBoard).contains(selectedTile)){
-                        System.out.println("Moving piece (Attack)");
-                        selectedTile.removePiece(); // BUG / TODO: piece is not getting removed
+                        selectedTile.removePiece();
                         selectedPiece.movePiece(selectedTile);
                         this.switchPlayers();
                         selectedPiece = null;
@@ -124,10 +123,7 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
                             selectedTile = null;
                             return; // Move wouldnt put opponent out of check. Ignore
                         }
-
-                        // Validate that move wouldnt put opponent into check
-                            
-
+    
 
                         System.out.println("Moving piece");
                         // Selected a piece and clicked on empty tile -> Move piece to that tile

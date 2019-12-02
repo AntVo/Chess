@@ -107,6 +107,7 @@ public class Tile extends JPanel
                 if (enemyPawn.getAttackMoves(chessBoard).contains(this)){
                     isAttacked = true;
                 }
+                continue;
             }
             if (enemyPiece.getValidMoves(chessBoard).contains(this)){
                 isAttacked = true;
