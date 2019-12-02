@@ -27,9 +27,9 @@ public class Queen extends Piece
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
         ArrayList<Tile> validMoves = new ArrayList<Tile>();
-        ArrayList<Tile> verticalMoves = this.getValidDiagonalMoves(board);
+        ArrayList<Tile> diagonalMoves = this.getValidDiagonalMoves(board);
         ArrayList<Tile> horizontalAndVerticalMoves = this.getValidHorizontalAndVerticalMoves(board);
-        validMoves.addAll(verticalMoves);
+        validMoves.addAll(diagonalMoves);
         validMoves.addAll(horizontalAndVerticalMoves);
         return validMoves;
     }

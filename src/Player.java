@@ -41,7 +41,7 @@ public class Player
     }
 
     public void removePiece(Piece pieceToRemove){
-       System.out.println(this.pieces.remove(pieceToRemove));
+        this.pieces.remove(pieceToRemove);
     }
 
     public ArrayList<Piece> getPieces(){
