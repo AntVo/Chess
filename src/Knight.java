@@ -14,7 +14,12 @@ public class Knight extends Piece
         super(imageLocation, color, tile);
     }
 
-    // Return ArrayList of Tiles piece can move to
+    /**
+     * Given a boardstate, calculate all valid moves for this piece.
+     * The Knight can move in an L shape
+     * @param  board [description]
+     * @return Arraylist of valid movess
+     */    
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
         ArrayList<Tile> validMoves = new ArrayList<Tile>();

@@ -14,7 +14,12 @@ public class Rook extends Piece
         super(imageLocation, color, tile);
     }
     
-    // Return ArrayList of Tiles piece can move to
+    /**
+     * Given a boardstate, calculate all valid moves for this piece.
+     * The Rook can move horizontally and Vertically
+     * @param  board [description]
+     * @return Arraylist of valid movess
+     */
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
         return getValidHorizontalAndVerticalMoves(board);

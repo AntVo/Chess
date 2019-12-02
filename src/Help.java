@@ -1,8 +1,5 @@
 import javax.swing.JPanel;
-
-
 import java.awt.*;
-
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,13 +7,10 @@ import javax.swing.border.MatteBorder;
 
 
 public class Help extends JPanel {
-
-		
 	public void initializeMainMenu() {
 		Help frame = new Help();
 		frame.setVisible(true);
 	}
-	
 	
 	/**
 	 * Create the panel.

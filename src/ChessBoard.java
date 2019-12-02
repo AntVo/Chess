@@ -56,6 +56,9 @@ public class ChessBoard extends JPanel
         }
     }
 
+    /**
+     * Places initial chess pieces on the chessboard
+     */
     public void initializeChessPieces(){
         String[] chessRow = {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK};
 
@@ -88,6 +91,14 @@ public class ChessBoard extends JPanel
         }        
     }
 
+    /**
+     * Creates a ChessPiece
+     * @param  pieceName  Name of piece, ex: "PAWN"
+     * @param  pieceColor Color of Piece
+     * @param  pieceTile  Tile to place Piece
+     * @param  player     Player that owns piece
+     * @return Piece that was created
+     */
     public Piece createPiece(String pieceName, String pieceColor, Tile pieceTile, Player player){
         Piece newPiece = null;
         String imgLocation = null;
@@ -123,6 +134,12 @@ public class ChessBoard extends JPanel
         return newPiece;
     }
     
+    /**
+     * Returns the tile at a x, y coordinate. (NOT row, column)
+     * @param  x x coordinate
+     * @param  y y coordinate
+     * @return Tile at the coordinates
+     */
     public Tile getTileAt(int x, int y)
     {
     	int chessX = y / (boardSize.width / 8);
@@ -131,14 +148,30 @@ public class ChessBoard extends JPanel
     	return chessBoard[chessX][chessY]; 
     }
 
+    /**
+     * Returns the tile at location given row and column
+     * @param  row tile row
+     * @param  col tile column
+     * @return Tile that was found
+     */
     public Tile getTileAtLocation(int row, int col){
         return this.chessBoard[row][col];
     }
 
+    /**
+     * Returns the piece at given row and column
+     * @param  row row
+     * @param  col column
+     * @return Piece at location if exists, else null
+     */
     public Piece getPieceAtLocation(int row, int col){
         return this.getTileAtLocation(row, col).getPiece();
     }   
 
+    /**
+     * Given a piece, highlight tiles on the chessboard that piece can make moves to
+     * @param piece the piece to check available moves for
+     */
     public void highlightAvailableMoves(Piece piece){
         ArrayList<Tile> availableMoves = piece.getValidMoves(this);
         for (Tile tile : availableMoves){
@@ -146,6 +179,9 @@ public class ChessBoard extends JPanel
         }
     }
 
+    /**
+     * Remove all tile highlighting from the board
+     */
     public void removeAllHighlights(){
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
@@ -154,6 +190,11 @@ public class ChessBoard extends JPanel
         }
     }
 
+    /** 
+     * Given a player, check if that player is in a "checked" state
+     * @param  player player to check
+     * @return true if checked, else false
+     */
     public boolean isChecked(Player player){
         Player opponent = player == playerOne ? playerTwo : playerOne;
         Piece playersKing = player.getKing();
@@ -165,6 +206,13 @@ public class ChessBoard extends JPanel
         return false;
     }
 
+    /**
+     * Given a player, check if that player in a "checkmated" state.
+     * This is done by generating all possible moves the player can make 
+     * and checking if any move gets them out of "check"
+     * @param  player player to check
+     * @return true if checked, else false
+     */
     public boolean isCheckmated(Player player){
         if (!(isChecked(player))){
             return false;
@@ -202,8 +250,6 @@ public class ChessBoard extends JPanel
     final Color DARK_BROWN = new Color(102, 51, 0);
     final Color LIGHT_GREEN = new Color(50, 150, 50);
     final Color LIGHT_RED = new Color(180, 40, 40);
-
-
     private static final String ROOK = "ROOK";
     private static final String KNIGHT = "KNIGHT";
     private static final String BISHOP = "BISHOP";
@@ -212,17 +258,17 @@ public class ChessBoard extends JPanel
     private static final String PAWN = "PAWN";
     private static final String WHITE = "WHITE";
     private static final String BLACK = "BLACK";
-    private static final String WHITE_BISHOP_PNG = "assets/pieces/white_bishop.png";
-    private static final String BLACK_BISHOP_PNG = "assets/pieces/black_bishop.png";
-    private static final String WHITE_KNIGHT_PNG = "assets/pieces/white_knight.png";
-    private static final String BLACK_KNIGHT_PNG ="assets/pieces/black_knight.png";
-    private static final String WHITE_ROOK_PNG = "assets/pieces/white_rook.png";
-    private static final String BLACK_ROOK_PNG = "assets/pieces/black_rook.png";
-    private static final String WHITE_KING_PNG = "assets/pieces/white_king.png";
-    private static final String BLACK_KING_PNG = "assets/pieces/black_king.png";
-    private static final String BLACK_QUEEN_PNG = "assets/pieces/black_queen.png";
-    private static final String WHITE_QUEEN_PNG = "assets/pieces/white_queen.png";
-    private static final String WHITE_PAWN_PNG = "assets/pieces/white_pawn.png";
-    private static final String BLACK_PAWN_PNG = "assets/pieces/black_pawn.png";
+    private static final String WHITE_BISHOP_PNG = "../assets/pieces/white_bishop.png";
+    private static final String BLACK_BISHOP_PNG = "../assets/pieces/black_bishop.png";
+    private static final String WHITE_KNIGHT_PNG = "../assets/pieces/white_knight.png";
+    private static final String BLACK_KNIGHT_PNG ="../assets/pieces/black_knight.png";
+    private static final String WHITE_ROOK_PNG = "../assets/pieces/white_rook.png";
+    private static final String BLACK_ROOK_PNG = "../assets/pieces/black_rook.png";
+    private static final String WHITE_KING_PNG = "../assets/pieces/white_king.png";
+    private static final String BLACK_KING_PNG = "../assets/pieces/black_king.png";
+    private static final String BLACK_QUEEN_PNG = "../assets/pieces/black_queen.png";
+    private static final String WHITE_QUEEN_PNG = "../assets/pieces/white_queen.png";
+    private static final String WHITE_PAWN_PNG = "../assets/pieces/white_pawn.png";
+    private static final String BLACK_PAWN_PNG = "../assets/pieces/black_pawn.png";
 
 }

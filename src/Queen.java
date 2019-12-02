@@ -5,23 +5,30 @@ import java.util.*;
 import javax.swing.*;
 
 /**
- * Piece 
+ * Behaviours for the Queen chess piece
  */
 public class Queen extends Piece
 {
 
+    /**
+     * Constructor for Queen
+     */
     public Queen(String imageLocation, String color, Tile tile)
     {   
         super(imageLocation, color, tile);
     }
 
-    // Return ArrayList of Tiles piece can move to
+    /**
+     * Given a boardstate, calculate all valid moves for this piece.
+     * The Queen can move in all directions vertically and diagonally.
+     * @param  board [description]
+     * @return Arraylist of valid movess
+     */
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
         ArrayList<Tile> validMoves = new ArrayList<Tile>();
         ArrayList<Tile> verticalMoves = this.getValidDiagonalMoves(board);
         ArrayList<Tile> horizontalAndVerticalMoves = this.getValidHorizontalAndVerticalMoves(board);
-         
         validMoves.addAll(verticalMoves);
         validMoves.addAll(horizontalAndVerticalMoves);
         return validMoves;

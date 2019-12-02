@@ -1,5 +1,7 @@
 
-
+/**
+* TestRunner is responsible for running the entire test suite for the Chess Application
+*/
 public class TestRunner {
 
     public static void main(String[] args)

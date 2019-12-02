@@ -14,7 +14,12 @@ public class Bishop extends Piece
         super(imageLocation, color, tile);
     }
 
-    // Return ArrayList of Tiles the Bishop can move to
+    /**
+     * Given a boardstate, calculate all valid moves for this piece.
+     * The Bishop can move diagonally
+     * @param  board [description]
+     * @return Arraylist of valid movess
+     */    
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {       
         return this.getValidDiagonalMoves(board);

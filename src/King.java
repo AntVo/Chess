@@ -13,12 +13,16 @@ public class King extends Piece
         this.opposingPlayer = oppPlayer;
     }
 
-    // Return ArrayList of Tiles piece can move to
-    // King is a unique piece for movement rules
-    //   - King can move all directions one space
-    //   - King can never move on a tile under attack by an enemy piece
-    //   - King can perform a "castling" maneuver if it never moved from its original
-    //   place and a rook is on its original space.
+    /**
+    *  Return ArrayList of Tiles piece can move to
+    *  King is a unique piece for movement rules
+    *  - King can move all directions one space
+    *  - King can never move on a tile under attack by an enemy piece
+    *  - King can perform a "castling" maneuver if it never moved from its original
+    * place and a rook is on its original space.
+    * @param  board [description]
+    * @return       [description]
+    */
     public ArrayList<Tile> getValidMoves(ChessBoard board)
     {   
         int row = this.getRow();

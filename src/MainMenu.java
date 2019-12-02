@@ -75,6 +75,5 @@ public class MainMenu extends JPanel {
 		MainMenuBackground.setBounds(0, 0, 600, 600);
 		add(MainMenuBackground);
 		
-		
 	}
 }
