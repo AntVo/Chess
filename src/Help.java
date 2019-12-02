@@ -29,7 +29,5 @@ public class Help extends JPanel {
 		MainMenuBackground.setIcon(new ImageIcon("assets/main/HelpBackground.png"));
 		MainMenuBackground.setBounds(0, 0, 600, 600);
 		add(MainMenuBackground);
-		
-		
 	}
 }

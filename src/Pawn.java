@@ -64,6 +64,7 @@ public class Pawn extends Piece
                 validMoves.add(board.getTileAtLocation(row + pawnDirection, col+1));
             }
         }
+        
         return validMoves;
     }
 

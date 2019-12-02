@@ -27,8 +27,11 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
         chessBoard.initializeChessBoard();
         chessBoard.initializeChessPieces();
         currentPlayer = playerOne;
+
+
         // Render the chessBoard by adding it to our JFrame
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+
     }
 
     // Perform necessary actions to setup a jframe to render
@@ -229,13 +232,16 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     public void mouseExited(MouseEvent e){
     }
 
+    public void closeGame(){
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
 
     public void switchPlayers(){
         this.currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
     }
 
     public static void main(String[] args)
-    {
+    {   
         GameManager gameManager = new GameManager();
         gameManager.initializeGame();
     }
