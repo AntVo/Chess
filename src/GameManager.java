@@ -185,23 +185,17 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     }
 
     public void checkAndMakePromotions(Piece piece){
-        chessBoard.repaint();
-
         if(piece instanceof Pawn)
         {
             String color = currentPlayer.getPlayerColor();
             if((color == "BLACK" && selectedTile.getRow() == 7) ||
                 (color == "WHITE" && selectedTile.getRow() == 0))
             {
-
                 currentPlayer.removePiece(piece);
                 selectedTile.removePiece();
                 Piece queen = (Queen)chessBoard.createPiece("QUEEN", color, selectedTile, currentPlayer);
                 selectedTile.add(queen);
                 queen.movePiece(selectedTile);
-                queen.validate();
-                selectedTile.validate();
-                System.out.println("repainted");
             }
         }
     }
@@ -217,15 +211,15 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
     *   i.e.    We could probably just use mouseClicked
     *  maybe we can implement both later, if we have time
     */
-    public void mouseReleased(MouseEvent e){}
-
-    public void mouseClicked(MouseEvent e) {
+    public void mouseReleased(MouseEvent e){
+    }
+    public void mouseClicked(MouseEvent e){
     }
     public void mouseMoved(MouseEvent e) {
     }
     public void mouseEntered(MouseEvent e){
     }
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e){
     }
 
 
@@ -235,13 +229,12 @@ public class GameManager extends JFrame implements MouseListener, MouseMotionLis
 
     public static void main(String[] args)
     {
-        
         GameManager gameManager = new GameManager();
         gameManager.initializeGame();
     }
 
 
-    // Enums
+    // ENUMS
     private static final String BLACK = "BLACK";
     private static final String WHITE = "WHITE";
     private static final Color RED = new Color(180, 40, 40);
